@@ -1,0 +1,10 @@
+{
+  "extends": ["eslint-config-semistandard", "plugin:prettier/recommended"],
+  "overrides": [
+    {
+      "files": ["__tests__/**"],
+      "plugins": ["eslint-plugin-jest"],
+      "extends": ["plugin:jest/recommended", "plugin:jest/style"]
+    }
+  ]
+}
