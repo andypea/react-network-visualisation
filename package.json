@@ -2,11 +2,17 @@
   "name": "react-svg-network",
   "version": "0.1.0",
   "description": "A react component for interactive network graph diagrams.",
-  "main": "index.js",
+  "main": "dist/bundle.cjs",
+  "type": "module",
+  "exports": {
+    "imports": "./dist/bundle.js",
+    "require": "./dist/bundle.csj"
+  },
   "scripts": {
     "test": "jest",
     "prettier": "prettier --check --ignore-path=.gitignore .",
-    "lint": "eslint --ignore-path=.gitignore ."
+    "lint": "eslint --ignore-path=.gitignore .",
+    "build": "rollup --config"
   },
   "keywords": [
     "react",
