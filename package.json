@@ -19,5 +19,8 @@
     "name": "Andrew Punnett",
     "email": "andrew.punnett@gmail.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
