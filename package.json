@@ -1,0 +1,23 @@
+{
+  "name": "react-svg-network",
+  "version": "0.1.0",
+  "description": "A react component for interactive network graph diagrams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "network",
+    "graph",
+    "svg",
+    "visualisation",
+    "interactive",
+    "diagram"
+  ],
+  "author": {
+    "name": "Andrew Punnett",
+    "email": "andrew.punnett@gmail.com"
+  },
+  "license": "MIT"
+}
