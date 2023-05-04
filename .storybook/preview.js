@@ -1,3 +1,5 @@
+import customTheme from "./customTheme.js";
+
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {
@@ -8,6 +10,9 @@ const preview = {
         date: /Date$/,
       },
     },
+  },
+  docs: {
+    theme: customTheme,
   },
 };
 
