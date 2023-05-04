@@ -1,10 +1,21 @@
 {
-  "extends": ["eslint-config-semistandard", "plugin:prettier/recommended"],
+  "extends": [
+    "eslint-config-semistandard",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime"
+  ],
   "overrides": [
     {
       "files": ["__tests__/**"],
       "plugins": ["eslint-plugin-jest"],
       "extends": ["plugin:jest/recommended", "plugin:jest/style"]
     }
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
