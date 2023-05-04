@@ -1,7 +1,9 @@
 {
-  "name": "react-svg-network",
+  "name": "react-network-visualisation",
   "version": "0.1.0",
   "description": "A react component for interactive network graph diagrams.",
+  "repository": "https://github.com/andypea/react-network-visualisation",
+  "bugs": "https://github.com/andypea/react-network-visualisation/issues",
   "main": "dist/bundle.cjs",
   "type": "module",
   "exports": {
