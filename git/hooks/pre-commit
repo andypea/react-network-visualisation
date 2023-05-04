@@ -1,0 +1,7 @@
+#!/bin/sh
+# git/hooks/pre-commit
+
+npm run prettier || exit $?
+npm run lint || exit $?
+npm run test || exit $?
+
