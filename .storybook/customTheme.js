@@ -4,7 +4,7 @@ import { create } from "@storybook/theming/create";
 
 export default create({
   base: "light",
-  brandTitle: "react-network-visualisation",
+  brandTitle: "react-simple-network-graph",
   brandUrl: "",
   brandImage: "",
   brandTarget: "_self",

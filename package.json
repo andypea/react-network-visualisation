@@ -1,9 +1,9 @@
 {
-  "name": "react-network-visualisation",
+  "name": "react-simple-network-graph",
   "version": "0.1.0",
   "description": "A react component for interactive network graph diagrams.",
-  "repository": "https://github.com/andypea/react-network-visualisation",
-  "bugs": "https://github.com/andypea/react-network-visualisation/issues",
+  "repository": "https://github.com/andypea/react-simple-network-graph",
+  "bugs": "https://github.com/andypea/react-simple-network-graph/issues",
   "main": "dist/bundle.cjs",
   "type": "module",
   "exports": {
