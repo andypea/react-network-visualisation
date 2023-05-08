@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { updateVerticesPositions } from "./numericalSimulation.js";
+import { updateVerticesPositions } from "./defaultNumericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { Network } from "./Network.jsx";
