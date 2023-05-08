@@ -41,7 +41,7 @@ export const Māhutonga = {
       {
         id: "Ginan",
         label: "Ginan",
-        fill: "white",
+        fill: "lightblue",
         position: { cx: 240, cy: 250 },
       },
     ],
