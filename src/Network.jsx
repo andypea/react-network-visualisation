@@ -1,19 +1,19 @@
 import PropTypes from "prop-types";
 
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
-import { Edge } from "./Edge.jsx";
+import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
 
 export function Network({
   VertexWrapper = StaticVertexWrapper,
   VertexRender = DefaultVertexElement,
+  EdgeRender = DefaultEdgeElement,
   width = 100,
   height = 100,
   vertices = [],
   edges = [],
   backgroundColour = "white",
   stroke = "black",
-  ...otherProps
 }) {
   // TODO: Don't include all other properties in verticesPositions.
   const verticesPositions = new Map(
@@ -27,7 +27,7 @@ export function Network({
   );
 
   return (
-    <svg width={width} height={height} {...otherProps}>
+    <svg width={width} height={height}>
       <rect
         x="0"
         y="0"
@@ -46,7 +46,7 @@ export function Network({
             )
             .map((e) => {
               return (
-                <Edge
+                <EdgeRender
                   key={e.id}
                   source={verticesPositions.get(e.source).position}
                   target={verticesPositions.get(e.target).position}
@@ -82,4 +82,5 @@ Network.propTypes = {
   edges: PropTypes.array,
   backgroundColour: PropTypes.string,
   stroke: PropTypes.string,
+  EdgeRender: PropTypes.func,
 };

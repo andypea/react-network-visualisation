@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const Edge = ({ source, target }) => {
+export const DefaultEdgeElement = ({ source, target }) => {
   return (
     <line
       x1={source.cx}
@@ -12,7 +12,7 @@ export const Edge = ({ source, target }) => {
   );
 };
 
-Edge.propTypes = {
+DefaultEdgeElement.propTypes = {
   source: PropTypes.object.isRequired,
   target: PropTypes.object.isRequired,
 };

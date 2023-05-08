@@ -2,11 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./numericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
+import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { Network } from "./Network.jsx";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 
 export function DynamicNetwork({
   VertexRender = DefaultVertexElement,
+  EdgeRender = DefaultEdgeElement,
   width = 100,
   height = 100,
   vertices = [],
@@ -108,6 +110,7 @@ export function DynamicNetwork({
     <Network
       VertexWrapper={VertexWrapper}
       VertexRender={VertexRender}
+      EdgeRender={EdgeRender}
       width={width}
       height={height}
       edges={edges}
@@ -120,6 +123,7 @@ export function DynamicNetwork({
 
 DynamicNetwork.propTypes = {
   VertexRender: PropTypes.func,
+  EdgeRender: PropTypes.func,
   edges: PropTypes.array,
   vertices: PropTypes.array,
   width: PropTypes.number,
