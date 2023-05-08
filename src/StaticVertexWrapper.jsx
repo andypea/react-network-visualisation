@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const StaticVertex = (props) => {
+export const StaticVertexWrapper = (props) => {
   return (
     <g transform={`translate(${props.cx} ${props.cy})`}>
       <props.VertexRender {...props.vertexSpecification} />
@@ -8,9 +8,9 @@ export const StaticVertex = (props) => {
   );
 };
 
-StaticVertex.propTypes = {
-  VertexRender: PropTypes.func.isRequired,
-  vertexSpecification: PropTypes.object.isRequired,
+StaticVertexWrapper.propTypes = {
   cx: PropTypes.number,
   cy: PropTypes.number,
+  VertexRender: PropTypes.func,
+  vertexSpecification: PropTypes.object,
 };

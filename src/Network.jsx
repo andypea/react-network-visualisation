@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
-import { StaticVertex } from "./StaticVertex.js";
 import { Edge } from "./Edge.jsx";
+import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
 
 export function Network({
-  Vertex = StaticVertex,
+  VertexWrapper = StaticVertexWrapper,
   VertexRender = DefaultVertexElement,
   width = 100,
   height = 100,
@@ -56,7 +56,7 @@ export function Network({
         </g>
         <g>
           {vertices.map((v) => (
-            <Vertex
+            <VertexWrapper
               key={v.id}
               id={v.id}
               cx={verticesPositions.get(v.id).position.cx}
@@ -73,7 +73,7 @@ export function Network({
 
 // TODO: These are not specific enough!
 Network.propTypes = {
-  Vertex: PropTypes.func,
+  VertexWrapper: PropTypes.func,
   VertexRender: PropTypes.func,
   width: PropTypes.number,
   height: PropTypes.number,

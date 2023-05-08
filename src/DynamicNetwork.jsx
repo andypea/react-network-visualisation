@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./numericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { Network } from "./Network.jsx";
-import { DraggableVertex } from "./DraggableVertex.jsx";
+import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 
 export function DynamicNetwork({
   VertexRender = DefaultVertexElement,
@@ -87,10 +87,10 @@ export function DynamicNetwork({
     }
   });
 
-  const Vertex = useCallback(
+  const VertexWrapper = useCallback(
     (props) => {
       return (
-        <DraggableVertex
+        <DraggableVertexWrapper
           {...props}
           moveVertex={moveVertex}
           freezeVertex={freezeVertex}
@@ -103,7 +103,7 @@ export function DynamicNetwork({
 
   return (
     <Network
-      Vertex={Vertex}
+      VertexWrapper={VertexWrapper}
       VertexRender={VertexRender}
       width={width}
       height={height}
