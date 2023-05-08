@@ -15,13 +15,14 @@ export function Network({
   backgroundColour = "white",
   stroke = "black",
 }) {
-  // TODO: Don't include all other properties in verticesPositions.
   const verticesPositions = new Map(
-    vertices.map(({ id, ...other }) => [
+    vertices.map(({ id, position }) => [
       id,
       {
-        position: { cx: width * Math.random(), cy: height * Math.random() },
-        ...other,
+        position: position ?? {
+          cx: width * Math.random(),
+          cy: height * Math.random(),
+        },
       },
     ])
   );
