@@ -9,6 +9,7 @@ import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 export function DynamicNetwork({
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
+  vertexPositionUpdater = updateVerticesPositions,
   width = 100,
   height = 100,
   vertices = [],
@@ -27,7 +28,7 @@ export function DynamicNetwork({
 
     function onFrame() {
       setVerticesPositions((oldVerticesPositions) =>
-        updateVerticesPositions(
+        vertexPositionUpdater(
           oldVerticesPositions,
           width,
           height,
@@ -53,7 +54,7 @@ export function DynamicNetwork({
 
     start();
     return () => stop();
-  }, [width, height, edges, vertices]);
+  }, [width, height, edges, vertices, vertexPositionUpdater]);
 
   const moveVertex = useCallback((id, position) => {
     setVerticesPositions((oldVerticesPositions) =>
@@ -130,4 +131,5 @@ DynamicNetwork.propTypes = {
   height: PropTypes.number,
   backgroundColour: PropTypes.string,
   stroke: PropTypes.string,
+  vertexPositionUpdater: PropTypes.func,
 };

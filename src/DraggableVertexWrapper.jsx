@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
+// TODO: extract this draggable stuff to a custom hook.
 export const DraggableVertexWrapper = (props) => {
   const thisVertex = useRef(null);
   const [dragging, setDragging] = useState(false);
