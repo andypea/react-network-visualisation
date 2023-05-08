@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./numericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { Network } from "./Network.jsx";
+import { DraggableVertex } from "./DraggableVertex.jsx";
 
 export function DynamicNetwork({
-  vertexRender = (vertexSpecification) => (
-    <DefaultVertexElement {...vertexSpecification} />
-  ),
+  VertexRender = DefaultVertexElement,
   width = 100,
   height = 100,
   ...props
@@ -51,7 +50,7 @@ export function DynamicNetwork({
     return () => stop();
   }, [width, height, props.edges, props.vertices]);
 
-  const moveVertex = (id, position) => {
+  const moveVertex = useCallback((id, position) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
         ...oldVerticesPositions.get(id),
@@ -59,25 +58,25 @@ export function DynamicNetwork({
         cy: position.y,
       })
     );
-  };
+  }, []);
 
-  const freezeVertex = (id) => {
+  const freezeVertex = useCallback((id) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
         ...oldVerticesPositions.get(id),
         frozen: true,
       })
     );
-  };
+  }, []);
 
-  const unfreezeVertex = (id) => {
+  const unfreezeVertex = useCallback((id) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
         ...oldVerticesPositions.get(id),
         frozen: false,
       })
     );
-  };
+  }, []);
 
   const verticesWithPositions = props.vertices.map((v) => {
     const vertexPos = verticesPositions.get(v.id);
@@ -88,22 +87,34 @@ export function DynamicNetwork({
     }
   });
 
+  const Vertex = useCallback(
+    (props) => {
+      return (
+        <DraggableVertex
+          {...props}
+          moveVertex={moveVertex}
+          freezeVertex={freezeVertex}
+          unfreezeVertex={unfreezeVertex}
+        />
+      );
+    },
+    [freezeVertex, unfreezeVertex, moveVertex]
+  );
+
   return (
     <Network
-      vertexRender={vertexRender}
+      Vertex={Vertex}
+      VertexRender={VertexRender}
       width={width}
       height={height}
       edges={props.edges}
       vertices={verticesWithPositions}
-      moveVetex={moveVertex}
-      freezeVertex={freezeVertex}
-      unfreezeVertex={unfreezeVertex}
     />
   );
 }
 
 DynamicNetwork.propTypes = {
-  vertexRender: PropTypes.func,
+  VertexRender: PropTypes.func,
   edges: PropTypes.array,
   vertices: PropTypes.array,
   width: PropTypes.number,

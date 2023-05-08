@@ -1,20 +1,14 @@
-// TODO: Use the vertexRender to pass the dynamic methods in.
-
 import PropTypes from "prop-types";
 
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
-import { Vertex } from "./Vertex.jsx";
+import { StaticVertex } from "./StaticVertex.js";
 import { Edge } from "./Edge.jsx";
 
 export function Network({
-  vertexRender = (vertexSpecification) => (
-    <DefaultVertexElement {...vertexSpecification} />
-  ),
+  Vertex = StaticVertex,
+  VertexRender = DefaultVertexElement,
   width = 100,
   height = 100,
-  moveVetex = () => undefined,
-  freezeVertex = () => undefined,
-  unfreezeVertex = () => undefined,
   vertices = [],
   edges = [],
   fill = "none",
@@ -67,10 +61,7 @@ export function Network({
               id={v.id}
               cx={verticesPositions.get(v.id).position.cx}
               cy={verticesPositions.get(v.id).position.cy}
-              moveVertex={moveVetex}
-              freezeVertex={freezeVertex}
-              unfreezeVertex={unfreezeVertex}
-              vertexRender={vertexRender}
+              VertexRender={VertexRender}
               vertexSpecification={v}
             />
           ))}
@@ -82,12 +73,10 @@ export function Network({
 
 // TODO: These are not specific enough!
 Network.propTypes = {
-  vertexRender: PropTypes.func,
+  Vertex: PropTypes.func,
+  VertexRender: PropTypes.func,
   width: PropTypes.number,
   height: PropTypes.number,
-  moveVetex: PropTypes.func,
-  freezeVertex: PropTypes.func,
-  unfreezeVertex: PropTypes.func,
   vertices: PropTypes.array,
   edges: PropTypes.array,
   fill: PropTypes.string,

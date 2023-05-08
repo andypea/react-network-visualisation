@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
-export const Vertex = (props) => {
+export const DraggableVertex = (props) => {
   const thisVertex = useRef(null);
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -53,18 +53,18 @@ export const Vertex = (props) => {
       onPointerMove={handleOnPointerMove}
       onPointerUp={handleOnPointerUp}
     >
-      {props.vertexRender(props.vertexSpecification)}
+      <props.VertexRender {...props.vertexSpecification} />
     </g>
   );
 };
 
-Vertex.propTypes = {
+DraggableVertex.propTypes = {
   freezeVertex: PropTypes.func.isRequired,
   unfreezeVertex: PropTypes.func.isRequired,
   moveVertex: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   cx: PropTypes.number.isRequired,
   cy: PropTypes.number.isRequired,
-  vertexRender: PropTypes.func.isRequired,
+  VertexRender: PropTypes.func.isRequired,
   vertexSpecification: PropTypes.object.isRequired,
 };
