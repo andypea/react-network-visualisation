@@ -2,11 +2,12 @@ export const updateVerticesPositions = (
   oldVerticesPositions,
   width,
   height,
-  friction,
-  timeStep,
   edges,
-  springConstant,
-  vertices
+  vertices,
+  friction = 10,
+  timeStep = 0.005,
+  springConstant = 10,
+  margin = 10
 ) => {
   // First create a new Map containing all the vertices listed.
   const newVerticesPositions = reconcileVertexPositions(
@@ -70,14 +71,14 @@ export const updateVerticesPositions = (
       cx: clamp(
         oldPosition.cx +
           (oldPosition.frozen ? 0 : 1) * timeStep * oldPosition.vx,
-        0,
-        width
+        margin,
+        width - margin
       ),
       cy: clamp(
         oldPosition.cy +
           (oldPosition.frozen ? 0 : 1) * timeStep * oldPosition.vy,
-        0,
-        height
+        margin,
+        height - margin
       ),
       vx: oldPosition.frozen
         ? 0

@@ -19,10 +19,6 @@ export function DynamicNetwork({
 } = {}) {
   const [verticesPositions, setVerticesPositions] = useState(new Map());
 
-  const timeStep = 0.005;
-  const friction = 10;
-  const springConstant = 10;
-
   useEffect(() => {
     let frameId = null;
 
@@ -32,10 +28,7 @@ export function DynamicNetwork({
           oldVerticesPositions,
           width,
           height,
-          friction,
-          timeStep,
           edges,
-          springConstant,
           vertices
         )
       );
