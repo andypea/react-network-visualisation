@@ -1,9 +1,14 @@
 import PropTypes from "prop-types";
 
-export const DefaultVertexElement = ({ fill = "none", label = "" }) => {
+export const DefaultVertexElement = (props) => {
+  const vertexSpecification = {
+    fill: "none",
+    label: "",
+    ...props.vertexSpecification,
+  };
   return (
     <g>
-      <circle r="5" fill={fill} stroke="black" />
+      <circle r="5" fill={vertexSpecification.fill} stroke="black" />
       <text
         dominantBaseline="middle"
         textAnchor="middle"
@@ -12,7 +17,7 @@ export const DefaultVertexElement = ({ fill = "none", label = "" }) => {
         strokeWidth="5"
         style={{ userSelect: "none" }}
       >
-        {label}
+        {vertexSpecification.label}
       </text>
       <text
         dominantBaseline="middle"
@@ -20,13 +25,12 @@ export const DefaultVertexElement = ({ fill = "none", label = "" }) => {
         y="20"
         style={{ userSelect: "none" }}
       >
-        {label}
+        {vertexSpecification.label}
       </text>
     </g>
   );
 };
 
 DefaultVertexElement.propTypes = {
-  fill: PropTypes.string,
-  label: PropTypes.string,
+  vertexSpecification: PropTypes.object,
 };

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export const StaticVertexWrapper = (props) => {
   return (
     <g transform={`translate(${props.cx} ${props.cy})`}>
-      <props.VertexRender {...props.vertexSpecification} />
+      <props.VertexRender vertexSpecification={props.vertexSpecification} />
     </g>
   );
 };

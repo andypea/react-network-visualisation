@@ -53,7 +53,7 @@ export const DraggableVertexWrapper = (props) => {
       onPointerMove={handleOnPointerMove}
       onPointerUp={handleOnPointerUp}
     >
-      <props.VertexRender {...props.vertexSpecification} />
+      <props.VertexRender vertexSpecification={props.vertexSpecification} />
     </g>
   );
 };
