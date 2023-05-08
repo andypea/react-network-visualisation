@@ -53,7 +53,10 @@ export const DraggableVertexWrapper = (props) => {
       onPointerMove={handleOnPointerMove}
       onPointerUp={handleOnPointerUp}
     >
-      <props.VertexRender vertexSpecification={props.vertexSpecification} />
+      <props.VertexRender
+        vertexSpecification={props.vertexSpecification}
+        backgroundColour={props.backgroundColour}
+      />
     </g>
   );
 };
@@ -67,4 +70,5 @@ DraggableVertexWrapper.propTypes = {
   cy: PropTypes.number.isRequired,
   VertexRender: PropTypes.func.isRequired,
   vertexSpecification: PropTypes.object.isRequired,
+  backgroundColour: PropTypes.string,
 };

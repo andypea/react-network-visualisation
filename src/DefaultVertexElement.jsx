@@ -13,7 +13,7 @@ export const DefaultVertexElement = (props) => {
         dominantBaseline="middle"
         textAnchor="middle"
         y="20"
-        stroke="white"
+        stroke={props.backgroundColour ?? "white"}
         strokeWidth="5"
         style={{ userSelect: "none" }}
       >
@@ -33,4 +33,5 @@ export const DefaultVertexElement = (props) => {
 
 DefaultVertexElement.propTypes = {
   vertexSpecification: PropTypes.object,
+  backgroundColour: PropTypes.string,
 };

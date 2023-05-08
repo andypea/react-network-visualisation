@@ -11,7 +11,7 @@ export function Network({
   height = 100,
   vertices = [],
   edges = [],
-  fill = "none",
+  backgroundColour = "white",
   stroke = "black",
   ...otherProps
 }) {
@@ -33,7 +33,7 @@ export function Network({
         y="0"
         width={width}
         height={height}
-        fill={fill}
+        fill={backgroundColour}
         stroke={stroke}
       />
       <g>
@@ -63,6 +63,7 @@ export function Network({
               cy={verticesPositions.get(v.id).position.cy}
               VertexRender={VertexRender}
               vertexSpecification={v}
+              backgroundColour={backgroundColour}
             />
           ))}
         </g>
@@ -79,6 +80,6 @@ Network.propTypes = {
   height: PropTypes.number,
   vertices: PropTypes.array,
   edges: PropTypes.array,
-  fill: PropTypes.string,
+  backgroundColour: PropTypes.string,
   stroke: PropTypes.string,
 };

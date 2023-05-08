@@ -9,7 +9,10 @@ export function DynamicNetwork({
   VertexRender = DefaultVertexElement,
   width = 100,
   height = 100,
-  ...props
+  vertices = [],
+  edges = [],
+  backgroundColour = "white",
+  stroke = "black",
 } = {}) {
   const [verticesPositions, setVerticesPositions] = useState(new Map());
 
@@ -28,9 +31,9 @@ export function DynamicNetwork({
           height,
           friction,
           timeStep,
-          props.edges,
+          edges,
           springConstant,
-          props.vertices
+          vertices
         )
       );
 
@@ -48,7 +51,7 @@ export function DynamicNetwork({
 
     start();
     return () => stop();
-  }, [width, height, props.edges, props.vertices]);
+  }, [width, height, edges, vertices]);
 
   const moveVertex = useCallback((id, position) => {
     setVerticesPositions((oldVerticesPositions) =>
@@ -78,7 +81,7 @@ export function DynamicNetwork({
     );
   }, []);
 
-  const verticesWithPositions = props.vertices.map((v) => {
+  const verticesWithPositions = vertices.map((v) => {
     const vertexPos = verticesPositions.get(v.id);
     if (vertexPos?.cx !== undefined && vertexPos?.cy !== undefined) {
       return { ...v, position: { cx: vertexPos.cx, cy: vertexPos.cy } };
@@ -107,8 +110,10 @@ export function DynamicNetwork({
       VertexRender={VertexRender}
       width={width}
       height={height}
-      edges={props.edges}
+      edges={edges}
       vertices={verticesWithPositions}
+      stroke={stroke}
+      backgroundColour={backgroundColour}
     />
   );
 }
@@ -119,4 +124,6 @@ DynamicNetwork.propTypes = {
   vertices: PropTypes.array,
   width: PropTypes.number,
   height: PropTypes.number,
+  backgroundColour: PropTypes.string,
+  stroke: PropTypes.string,
 };

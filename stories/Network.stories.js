@@ -7,6 +7,7 @@ export default {
   args: {
     width: 400,
     height: 400,
+    backgroundColour: "lightgrey",
   },
 };
 
