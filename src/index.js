@@ -1,4 +1,4 @@
 // src/index.js
 
-export { Network } from "./Network.jsx";
-export { DynamicNetwork } from "./DynamicNetwork.jsx";
+export { NetworkGraph } from "./NetworkGraph.jsx";
+export { DynamicNetworkGraph } from "./DynamicNetworkGraph.jsx";

@@ -4,7 +4,7 @@ import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
 
-export function Network({
+export function NetworkGraph({
   VertexWrapper = StaticVertexWrapper,
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
@@ -74,7 +74,7 @@ export function Network({
 }
 
 // TODO: These are not specific enough!
-Network.propTypes = {
+NetworkGraph.propTypes = {
   VertexWrapper: PropTypes.func,
   VertexRender: PropTypes.func,
   width: PropTypes.number,

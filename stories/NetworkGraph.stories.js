@@ -1,8 +1,8 @@
-import { DynamicNetwork } from "../src/DynamicNetwork.jsx";
+import { NetworkGraph } from "../src/NetworkGraph.jsx";
 
 export default {
-  title: "Examples/DynamicNetwork",
-  component: DynamicNetwork,
+  title: "Examples/NetworkGraph",
+  component: NetworkGraph,
   tags: ["autodocs"],
   args: {
     width: 400,
@@ -18,7 +18,7 @@ export const Māhutonga = {
         id: "Gacrux",
         label: "Gacrux",
         fill: "yellow",
-        position: { cx: 200, cy: 100 },
+        position: { cx: 200, cy: 50 },
       },
       {
         id: "Mimosa",
@@ -30,7 +30,7 @@ export const Māhutonga = {
         id: "Acrux",
         label: "Acrux",
         fill: "white",
-        position: { cx: 200, cy: 250 },
+        position: { cx: 200, cy: 350 },
       },
       {
         id: "Imai",
@@ -46,8 +46,8 @@ export const Māhutonga = {
       },
     ],
     edges: [
-      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux", length: 300 },
-      { id: "MimosaImai", source: "Mimosa", target: "Imai", length: 200 },
+      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux" },
+      { id: "MimosaImai", source: "Mimosa", target: "Imai" },
     ],
   },
 };
@@ -55,11 +55,11 @@ export const Māhutonga = {
 export const Square = {
   args: {
     vertices: [
-      { id: "One", fill: "red", label: "One", position: { cx: 100, cy: 100 } },
+      { id: "One", fill: "red", label: "Foo", position: { cx: 100, cy: 100 } },
       {
         id: "Two",
         fill: "orange",
-        label: "Two",
+        label: "Bar",
         position: { cx: 300, cy: 100 },
       },
       {
@@ -76,12 +76,12 @@ export const Square = {
       },
     ],
     edges: [
-      { id: "OneTwo", source: "One", target: "Two", length: 100 },
-      { id: "OneThree", source: "One", target: "Three", length: 100 },
-      { id: "OneFour", source: "One", target: "Four", length: 100 },
-      { id: "TwoThree", source: "Two", target: "Three", length: 100 },
-      { id: "TwoFour", source: "Two", target: "Four", length: 100 },
-      { id: "ThreeFour", source: "Three", target: "Four", length: 100 },
+      { id: "OneTwo", source: "One", target: "Two" },
+      { id: "OneThree", source: "One", target: "Three" },
+      { id: "OneFour", source: "One", target: "Four" },
+      { id: "TwoThree", source: "Two", target: "Three" },
+      { id: "TwoFour", source: "Two", target: "Four" },
+      { id: "ThreeFour", source: "Three", target: "Four" },
     ],
   },
 };
@@ -94,9 +94,9 @@ export const RandomTriangle = {
       { id: "C", fill: "black", label: "C" },
     ],
     edges: [
-      { id: "AB", source: "A", target: "B", length: 100 },
-      { id: "AC", source: "A", target: "C", length: 100 },
-      { id: "BC", source: "B", target: "C", length: 100 },
+      { id: "AB", source: "A", target: "B" },
+      { id: "AC", source: "A", target: "C" },
+      { id: "BC", source: "B", target: "C" },
     ],
   },
 };

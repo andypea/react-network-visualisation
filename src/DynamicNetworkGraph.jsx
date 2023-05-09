@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./defaultNumericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
-import { Network } from "./Network.jsx";
+import { NetworkGraph } from "./NetworkGraph.jsx";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 
-export function DynamicNetwork({
+export function DynamicNetworkGraph({
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
   vertexPositionUpdater = updateVerticesPositions,
@@ -101,7 +101,7 @@ export function DynamicNetwork({
   );
 
   return (
-    <Network
+    <NetworkGraph
       VertexWrapper={VertexWrapper}
       VertexRender={VertexRender}
       EdgeRender={EdgeRender}
@@ -115,7 +115,7 @@ export function DynamicNetwork({
   );
 }
 
-DynamicNetwork.propTypes = {
+DynamicNetworkGraph.propTypes = {
   VertexRender: PropTypes.func,
   EdgeRender: PropTypes.func,
   edges: PropTypes.array,

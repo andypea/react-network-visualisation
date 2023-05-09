@@ -1,5 +1,5 @@
 import { Canvas, Meta } from "@storybook/blocks";
-import * as DynamicNetworkStories from "./DynamicNetwork.stories.js";
+import * as DynamicNetworkGraphStories from "./DynamicNetworkGraph.stories.js";
 
 <Meta title="Introduction" />
 
@@ -8,7 +8,7 @@ import * as DynamicNetworkStories from "./DynamicNetwork.stories.js";
 This package contains React components that allow you to create network graphs.
 It exports two components:
 
-- `<Network />`, which will render a static network graph; and
-- `<DynamicNetwork />`, which will render a dynamic graph, with draggable vertices and a numerical simulation that adjusts the vertex positions until an optimised edge length is obtained.
+- `<NetworkGraph />`, which will render a static network graph; and
+- `<DynamicNetworkGraph />`, which will render a dynamic graph, with draggable vertices and a numerical simulation that adjusts the vertex positions until an optimised edge length is obtained.
 
-<Canvas of={DynamicNetworkStories.Māhutonga} />
+<Canvas of={DynamicNetworkGraphStories.Māhutonga} />
