@@ -1,4 +1,6 @@
 import { NetworkGraph } from "../src/NetworkGraph.jsx";
+import { CustomVertexElement } from "./CustomVertexElement.jsx";
+import { CustomEdgeElement } from "./CustomEdgeElement.jsx";
 
 export default {
   title: "Examples/NetworkGraph",
@@ -7,7 +9,35 @@ export default {
   args: {
     width: 400,
     height: 400,
-    backgroundColour: "lightgrey",
+    vertices: [
+      { id: "One", fill: "red", label: "Foo", position: { cx: 100, cy: 100 } },
+      {
+        id: "Two",
+        fill: "orange",
+        label: "Bar",
+        position: { cx: 300, cy: 100 },
+      },
+      {
+        id: "Three",
+        fill: "yellow",
+        label: "Three",
+        position: { cx: 100, cy: 300 },
+      },
+      {
+        id: "Four",
+        fill: "green",
+        label: "Four",
+        position: { cx: 300, cy: 300 },
+      },
+    ],
+    edges: [
+      { id: "OneTwo", source: "One", target: "Two" },
+      { id: "OneThree", source: "One", target: "Three" },
+      { id: "OneFour", source: "One", target: "Four" },
+      { id: "TwoThree", source: "Two", target: "Three" },
+      { id: "TwoFour", source: "Two", target: "Four" },
+      { id: "ThreeFour", source: "Three", target: "Four" },
+    ],
   },
 };
 
@@ -53,37 +83,7 @@ export const Māhutonga = {
 };
 
 export const Square = {
-  args: {
-    vertices: [
-      { id: "One", fill: "red", label: "Foo", position: { cx: 100, cy: 100 } },
-      {
-        id: "Two",
-        fill: "orange",
-        label: "Bar",
-        position: { cx: 300, cy: 100 },
-      },
-      {
-        id: "Three",
-        fill: "yellow",
-        label: "Three",
-        position: { cx: 100, cy: 300 },
-      },
-      {
-        id: "Four",
-        fill: "green",
-        label: "Four",
-        position: { cx: 300, cy: 300 },
-      },
-    ],
-    edges: [
-      { id: "OneTwo", source: "One", target: "Two" },
-      { id: "OneThree", source: "One", target: "Three" },
-      { id: "OneFour", source: "One", target: "Four" },
-      { id: "TwoThree", source: "Two", target: "Three" },
-      { id: "TwoFour", source: "Two", target: "Four" },
-      { id: "ThreeFour", source: "Three", target: "Four" },
-    ],
-  },
+  args: {},
 };
 
 export const RandomTriangle = {
@@ -99,4 +99,14 @@ export const RandomTriangle = {
       { id: "BC", source: "B", target: "C" },
     ],
   },
+};
+
+export const CustomEdges = {
+  args: {
+    EdgeRender: CustomEdgeElement,
+  },
+};
+
+export const CustomVertices = {
+  args: { VertexRender: CustomVertexElement },
 };
