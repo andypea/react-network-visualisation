@@ -7,7 +7,7 @@
   "main": "dist/bundle.cjs",
   "type": "module",
   "exports": {
-    "imports": "./dist/bundle.js",
+    "import": "./dist/bundle.js",
     "require": "./dist/bundle.csj"
   },
   "scripts": {
