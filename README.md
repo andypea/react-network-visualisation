@@ -45,6 +45,8 @@ import { DynamicNetworkGraph } from 'react-simple-network-graph';
 ...
 
 <DynamicNetworkGraph
+    width={400}
+    height={400}
     vertices={[
       { id: "Gacrux", label: "Gacrux", fill: "yellow", position: { cx: 200, cy: 100 }, },
       { id: "Mimosa", label: "Mimosa", fill: "white", position: { cx: 100, cy: 150 }, },
