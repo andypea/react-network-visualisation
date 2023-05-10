@@ -15,4 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-[unreleased]: https://github.com/andypea/react-simple-network-graph
+## [0.1.0] - 2023-05-10
+
+### Added
+
+- `<NetworkGraph />` renders a static network graph.
+- `<DynamicNetworkGraph />` renders a dynamic network graph with draggable vertices.
+
+[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.1.0
