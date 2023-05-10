@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 
+/**
+ * A component that wraps each vertex and sets the position.
+ */
 export const StaticVertexWrapper = (props) => {
   return (
     <g transform={`translate(${props.cx} ${props.cy})`}>

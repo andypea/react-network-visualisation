@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 
+/**
+ * The default component to render at each edge.
+ */
 export const DefaultEdgeElement = ({ source, target }) => {
   return (
     <line
@@ -13,6 +16,13 @@ export const DefaultEdgeElement = ({ source, target }) => {
 };
 
 DefaultEdgeElement.propTypes = {
+  /**
+   * The position of the source vertex.
+   */
   source: PropTypes.object.isRequired,
+
+  /**
+   * The position of the target vertex.
+   */
   target: PropTypes.object.isRequired,
 };

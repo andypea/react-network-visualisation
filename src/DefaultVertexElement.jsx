@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 
+/**
+ * The default component to render at each vertex.
+ */
 export const DefaultVertexElement = (props) => {
+  // Set some default property values if they are missing.
   const vertexSpecification = {
     fill: "none",
     label: "",
@@ -10,6 +14,7 @@ export const DefaultVertexElement = (props) => {
     <g>
       <circle r="5" fill={vertexSpecification.fill} stroke="black" />
       <text
+        // Create a plain background for the text.
         dominantBaseline="middle"
         textAnchor="middle"
         y="20"
@@ -32,6 +37,13 @@ export const DefaultVertexElement = (props) => {
 };
 
 DefaultVertexElement.propTypes = {
+  /**
+   * The vertex specification supplied to the network graph.
+   */
   vertexSpecification: PropTypes.object,
+
+  /**
+   * The background colour of the network graph.
+   */
   backgroundColour: PropTypes.string,
 };

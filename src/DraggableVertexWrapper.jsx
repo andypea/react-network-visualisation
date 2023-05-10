@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
-// TODO: extract this draggable stuff to a custom hook.
+/**
+ * Vertex wrapper that makes the vertices draggable.
+ */
 export const DraggableVertexWrapper = (props) => {
   const thisVertex = useRef(null);
   const [dragging, setDragging] = useState(false);
@@ -63,13 +65,48 @@ export const DraggableVertexWrapper = (props) => {
 };
 
 DraggableVertexWrapper.propTypes = {
+  /**
+   * Function that pauses automatic updates of the vertex's position, called when dragging begins.
+   */
   freezeVertex: PropTypes.func.isRequired,
+
+  /**
+   * Function that re-enabled updates of the vertex's position, called when dragging stops.
+   */
   unfreezeVertex: PropTypes.func.isRequired,
+
+  /**
+   * Function that moves the vertex.
+   */
   moveVertex: PropTypes.func.isRequired,
+
+  /**
+   * ID of the current vertex.
+   */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Position of the current vertex (x-value).
+   */
   cx: PropTypes.number.isRequired,
+
+  /**
+   * Position of the current vertex (y-value).
+   */
   cy: PropTypes.number.isRequired,
+
+  /**
+   * Component that renders the visible vertex.
+   */
   VertexRender: PropTypes.func.isRequired,
+
+  /**
+   * The vertex specification supplied to the network graph.
+   */
   vertexSpecification: PropTypes.object.isRequired,
+
+  /**
+   * The background colour of the network graph.
+   */
   backgroundColour: PropTypes.string,
 };

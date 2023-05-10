@@ -4,6 +4,9 @@ import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
 
+/**
+ * A static (by default) network graph.
+ */
 export function NetworkGraph({
   VertexWrapper = StaticVertexWrapper,
   VertexRender = DefaultVertexElement,
@@ -15,6 +18,7 @@ export function NetworkGraph({
   backgroundColour = "white",
   stroke = "black",
 }) {
+  // Create random positions for all vertices that aren't supplied with a position.
   const verticesPositions = new Map(
     vertices.map(({ id, position }) => [
       id,
@@ -39,21 +43,25 @@ export function NetworkGraph({
       />
       <g>
         <g>
-          {edges
-            .filter(
-              (e) =>
-                verticesPositions.has(e.source) &&
-                verticesPositions.has(e.target)
-            )
-            .map((e) => {
-              return (
-                <EdgeRender
-                  key={e.id}
-                  source={verticesPositions.get(e.source).position}
-                  target={verticesPositions.get(e.target).position}
-                />
-              );
-            })}
+          {
+            // Place all edges above the vertices in the SVG, so they don't obscure them.
+            edges
+              .filter(
+                // Don't try and render any edges to non-existent vertices.
+                (e) =>
+                  verticesPositions.has(e.source) &&
+                  verticesPositions.has(e.target)
+              )
+              .map((e) => {
+                return (
+                  <EdgeRender
+                    key={e.id}
+                    source={verticesPositions.get(e.source).position}
+                    target={verticesPositions.get(e.target).position}
+                  />
+                );
+              })
+          }
         </g>
         <g>
           {vertices.map((v) => (
@@ -73,15 +81,50 @@ export function NetworkGraph({
   );
 }
 
-// TODO: These are not specific enough!
 NetworkGraph.propTypes = {
-  VertexWrapper: PropTypes.func,
-  VertexRender: PropTypes.func,
+  /**
+   * Width of the graph in pixels.
+   */
   width: PropTypes.number,
+
+  /**
+   * Height of the graph in pixels.
+   */
   height: PropTypes.number,
-  vertices: PropTypes.array,
+
+  /**
+   * Array of containing all edges in the graph.
+   */
   edges: PropTypes.array,
+
+  /**
+   * Array containing all vertices in the graph.
+   */
+  vertices: PropTypes.array,
+
+  /**
+   * Background colour of the graph.
+   */
   backgroundColour: PropTypes.string,
+
+  /**
+   * Colour of the box around the graph.
+   */
   stroke: PropTypes.string,
+
+  /**
+   * Component to render at each vertex.
+   */
+  VertexRender: PropTypes.func,
+
+  /**
+   * Component to render at each edge.
+   */
   EdgeRender: PropTypes.func,
+
+  /**
+   * Component to place each vertex in.
+   * Allows people to add functionality to vertices, such as making them draggable.
+   */
+  VertexWrapper: PropTypes.func,
 };

@@ -6,19 +6,24 @@ import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { NetworkGraph } from "./NetworkGraph.jsx";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 
+/**
+ * Dynamic network graph with draggable vertices.
+ */
 export function DynamicNetworkGraph({
-  VertexRender = DefaultVertexElement,
-  EdgeRender = DefaultEdgeElement,
-  vertexPositionUpdater = updateVerticesPositions,
   width = 100,
   height = 100,
   vertices = [],
   edges = [],
   backgroundColour = "white",
   stroke = "black",
+  VertexRender = DefaultVertexElement,
+  EdgeRender = DefaultEdgeElement,
+  vertexPositionUpdater = updateVerticesPositions,
 } = {}) {
+  // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
 
+  // Update the vertex positions on each frame.
   useEffect(() => {
     let frameId = null;
 
@@ -49,6 +54,13 @@ export function DynamicNetworkGraph({
     return () => stop();
   }, [width, height, edges, vertices, vertexPositionUpdater]);
 
+  /**
+   * Manually move a vertex.
+   * Called as vertices are dragged.
+   *
+   * @param {string} id - ID of the vertex to move.
+   * @param {Object} position - New position for the vertex.
+   */
   const moveVertex = useCallback((id, position) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
@@ -59,6 +71,12 @@ export function DynamicNetworkGraph({
     );
   }, []);
 
+  /**
+   * Stop automatically updating the vertex position.
+   * Called when a user starts dragging a vertex.
+   *
+   * @param {string} id - ID of the vertex to move.
+   */
   const freezeVertex = useCallback((id) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
@@ -68,6 +86,12 @@ export function DynamicNetworkGraph({
     );
   }, []);
 
+  /**
+   * Re-enable automatic updates of the vertex position.
+   * Called when a vertex stops being dragged.
+   *
+   * @param {string} id - ID of the vertex to move.
+   */
   const unfreezeVertex = useCallback((id) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
@@ -77,15 +101,9 @@ export function DynamicNetworkGraph({
     );
   }, []);
 
-  const verticesWithPositions = vertices.map((v) => {
-    const vertexPos = verticesPositions.get(v.id);
-    if (vertexPos?.cx !== undefined && vertexPos?.cy !== undefined) {
-      return { ...v, position: { cx: vertexPos.cx, cy: vertexPos.cy } };
-    } else {
-      return v;
-    }
-  });
-
+  // Create a vertex wrapper that will permit dragging.
+  // The use of `useCallback` prevents the vertices being
+  // recreated by React on every frame.
   const VertexWrapper = useCallback(
     (props) => {
       return (
@@ -99,6 +117,18 @@ export function DynamicNetworkGraph({
     },
     [freezeVertex, unfreezeVertex, moveVertex]
   );
+
+  // Create an array of vertices with their current positions.
+  // This will be passed to the <NetworkGraph /> component,
+  // which will render the graph.
+  const verticesWithPositions = vertices.map((v) => {
+    const vertexPos = verticesPositions.get(v.id);
+    if (vertexPos?.cx !== undefined && vertexPos?.cy !== undefined) {
+      return { ...v, position: { cx: vertexPos.cx, cy: vertexPos.cy } };
+    } else {
+      return v;
+    }
+  });
 
   return (
     <NetworkGraph
@@ -116,13 +146,48 @@ export function DynamicNetworkGraph({
 }
 
 DynamicNetworkGraph.propTypes = {
-  VertexRender: PropTypes.func,
-  EdgeRender: PropTypes.func,
-  edges: PropTypes.array,
-  vertices: PropTypes.array,
+  /**
+   * Width of the graph in pixels.
+   */
   width: PropTypes.number,
+
+  /**
+   * Height of the graph in pixels.
+   */
   height: PropTypes.number,
+
+  /**
+   * Array of containing all edges in the graph.
+   */
+  edges: PropTypes.array,
+
+  /**
+   * Array containing all vertices in the graph.
+   */
+  vertices: PropTypes.array,
+
+  /**
+   * Background colour of the graph.
+   */
   backgroundColour: PropTypes.string,
+
+  /**
+   * Colour of the box around the graph.
+   */
   stroke: PropTypes.string,
+
+  /**
+   * Component to render at each vertex.
+   */
+  VertexRender: PropTypes.func,
+
+  /**
+   * Component to render at each edge.
+   */
+  EdgeRender: PropTypes.func,
+
+  /**
+   * Function that updates the vertex positions on each frame.
+   */
   vertexPositionUpdater: PropTypes.func,
 };

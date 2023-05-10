@@ -1,3 +1,19 @@
+/**
+ * Update the vertex positions.
+ *
+ * Uses Verlet integration, which will gradually optimise the edge lengths
+ * until they approach the lengths requested in their specification.
+ *
+ * @param {Object[]} oldVerticesPositions The pre-update vertex postions.
+ * @param {number} width The max x-value of each vertex.
+ * @param {number} height The max y-value of each vertex.
+ * @param {Object[]} edges Edge specification for the graph. Each edge to optimise should have a `length` property.
+ * @param {Object[]} vertices Vertex specification for the graph. Any vertex positions included will be ignored.
+ * @param {number} [friction] The amount of friction applied to each vertex.
+ * @param {number} [timeStep] How far to step forward in each timeStep.
+ * @param {number} [springConstant] How springy each edge is.
+ * @param {number} [margin] The size of margin around the edge of the graph that vertices will not enter.
+ */
 export const updateVerticesPositions = (
   oldVerticesPositions,
   width,
@@ -9,7 +25,7 @@ export const updateVerticesPositions = (
   springConstant = 10,
   margin = 10
 ) => {
-  // First create a new Map containing all the vertices listed.
+  // Drop all unused vertices from the vertex positions Map and add new vertices.
   const newVerticesPositions = reconcileVertexPositions(
     vertices,
     oldVerticesPositions,
@@ -19,6 +35,7 @@ export const updateVerticesPositions = (
 
   const forces = new Map(vertices.map((vertex) => [vertex.id, { x: 0, y: 0 }]));
 
+  // Add a force representing friction to each vertex.
   for (const vertex of vertices) {
     const vertexPosition = newVerticesPositions.get(vertex.id);
     const force = forces.get(vertex.id);
@@ -29,6 +46,7 @@ export const updateVerticesPositions = (
     });
   }
 
+  // Add a force to each pair of vertices joined by an edge that optimises the edge length.
   for (const e of edges) {
     if (
       !newVerticesPositions.has(e.source) ||
@@ -65,6 +83,7 @@ export const updateVerticesPositions = (
     });
   }
 
+  // Update the position and velocity of each vertex.
   for (const vertex of vertices) {
     const oldPosition = newVerticesPositions.get(vertex.id);
     newVerticesPositions.set(vertex.id, {
