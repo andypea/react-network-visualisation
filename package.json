@@ -17,7 +17,8 @@
     "build": "rollup --config",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "include-local-gitconfig": "git config --local include.path ../.gitconfig"
+    "include-local-gitconfig": "git config --local include.path ../.gitconfig",
+    "prepublishOnly": "jest && node scripts/gitTagMatchesPackageVersion.js"
   },
   "keywords": [
     "react",
