@@ -19,6 +19,7 @@ export function DynamicNetworkGraph({
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
   vertexPositionUpdater = updateVerticesPositions,
+  ...otherProps
 } = {}) {
   // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
@@ -141,6 +142,7 @@ export function DynamicNetworkGraph({
       vertices={verticesWithPositions}
       stroke={stroke}
       backgroundColour={backgroundColour}
+      {...otherProps}
     />
   );
 }

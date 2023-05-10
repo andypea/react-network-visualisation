@@ -17,6 +17,7 @@ export function NetworkGraph({
   edges = [],
   backgroundColour = "white",
   stroke = "black",
+  ...otherProps
 }) {
   // Create random positions for all vertices that aren't supplied with a position.
   const verticesPositions = new Map(
@@ -32,7 +33,12 @@ export function NetworkGraph({
   );
 
   return (
-    <svg width={width} height={height}>
+    <svg
+      width={width}
+      height={height}
+      className="network-graph"
+      {...otherProps}
+    >
       <rect
         x="0"
         y="0"
