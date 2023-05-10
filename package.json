@@ -6,6 +6,13 @@
   "bugs": "https://github.com/andypea/react-simple-network-graph/issues",
   "main": "dist/bundle.cjs",
   "type": "module",
+  "files": [
+    "package.json",
+    "README.me",
+    "CHANGELOG.md",
+    "dist",
+    "src"
+  ],
   "exports": {
     "import": "./dist/bundle.js",
     "require": "./dist/bundle.csj"
