@@ -10,6 +10,11 @@ const preview = {
         date: /Date$/,
       },
     },
+    options: {
+      storySort: {
+        order: ["Introduction", "Changelog"],
+      },
+    },
   },
   docs: {
     theme: customTheme,
