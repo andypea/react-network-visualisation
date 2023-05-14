@@ -4,6 +4,7 @@
   "description": "A react component for interactive network graph diagrams.",
   "repository": "https://github.com/andypea/react-simple-network-graph",
   "bugs": "https://github.com/andypea/react-simple-network-graph/issues",
+  "homepage": "https://andypea.github.io/react-simple-network-graph",
   "main": "dist/bundle.cjs",
   "type": "module",
   "files": [
