@@ -12,3 +12,5 @@ done
 
 # ImageMagick doesn't compress ico files well, so we will only include the smaller images.
 convert icons/icon-16.png icons/icon-32.png icons/icon-48.png ./favicon.ico
+
+cp ./icon_master.svg ./favicon.svg
