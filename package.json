@@ -1,6 +1,6 @@
 {
   "name": "react-simple-network-graph",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A react component for interactive network graph diagrams.",
   "repository": "https://github.com/andypea/react-simple-network-graph",
   "bugs": "https://github.com/andypea/react-simple-network-graph/issues",
