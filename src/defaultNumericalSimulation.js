@@ -3,6 +3,7 @@
  *
  * Uses Verlet integration, which will gradually optimise the edge lengths
  * until they approach the lengths requested in their specification.
+ * Also includes a term which will push vertices apart.
  *
  * @param {Object[]} oldVerticesPositions The pre-update vertex postions.
  * @param {number} width The max x-value of each vertex.
@@ -13,6 +14,7 @@
  * @param {number} [timeStep] How far to step forward in each timeStep.
  * @param {number} [springConstant] How springy each edge is.
  * @param {number} [margin] The size of margin around the edge of the graph that vertices will not enter.
+ * @param {number} [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 export const updateVerticesPositions = (
   oldVerticesPositions,
@@ -23,7 +25,8 @@ export const updateVerticesPositions = (
   friction = 10,
   timeStep = 0.005,
   springConstant = 10,
-  margin = 10
+  margin = 10,
+  interbodyForceStrength = -100000
 ) => {
   // Drop all unused vertices from the vertex positions Map and add new vertices.
   const newVerticesPositions = reconcileVertexPositions(
@@ -81,6 +84,44 @@ export const updateVerticesPositions = (
       x: forceTarget.x - forceSourceToTarget.x,
       y: forceTarget.y - forceSourceToTarget.y,
     });
+  }
+
+  for (let i = 0; i < vertices.length; i++) {
+    const vertexIId = vertices[i].id;
+    for (let j = i + 1; j < vertices.length; j++) {
+      const vertexJId = vertices[j].id;
+
+      const vertexIPosition = newVerticesPositions.get(vertexIId);
+      const vertexJPosition = newVerticesPositions.get(vertexJId);
+
+      const offset = {
+        x: vertexJPosition.cx - vertexIPosition.cx,
+        y: vertexJPosition.cy - vertexIPosition.cy,
+      };
+
+      const oneOverdistanceCubed = Math.pow(
+        Math.pow(offset.x, 2) + Math.pow(offset.y, 2),
+        -3 / 2
+      );
+
+      const newForceOnI = {
+        x: interbodyForceStrength * offset.x * oneOverdistanceCubed,
+        y: interbodyForceStrength * offset.y * oneOverdistanceCubed,
+      };
+
+      const forceI = forces.get(vertexIId);
+      const forceJ = forces.get(vertexJId);
+
+      forces.set(vertexIId, {
+        x: forceI.x + newForceOnI.x,
+        y: forceI.y + newForceOnI.y,
+      });
+
+      forces.set(vertexJId, {
+        x: forceJ.x - newForceOnI.x,
+        y: forceJ.y - newForceOnI.y,
+      });
+    }
   }
 
   // Update the position and velocity of each vertex.
