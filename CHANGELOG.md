@@ -9,13 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added a repulsive inter-body force to the default numerical simulation.
+- Add a repulsive inter-body force to the default numerical simulation.
 
 ### Fixed
 
 ### Changed
 
 ### Removed
+
+## [0.1.2] - 2023-05-14
+
+### Added
+
+- Add more examples demonstrating usage.
+
+## [0.1.1] - 2023-05-10
+
+### Added
+
+- Add a GitHub Action to build and deploy the website.
+- Add more checks to the prepublishonly script.
 
 ## [0.1.0] - 2023-05-10
 
@@ -24,5 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `<NetworkGraph />` renders a static network graph.
 - `<DynamicNetworkGraph />` renders a dynamic network graph with draggable vertices.
 
-[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.1.2
+[0.1.1]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.1.1
 [0.1.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.1.0
