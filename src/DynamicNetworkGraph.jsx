@@ -26,6 +26,16 @@ export function DynamicNetworkGraph({
 
   // Update the vertex positions on each frame.
   useEffect(() => {
+    setVerticesPositions((oldVerticesPositions) =>
+      vertexPositionUpdater(
+        oldVerticesPositions,
+        width,
+        height,
+        edges,
+        vertices
+      )
+    );
+
     let frameId = null;
 
     function onFrame() {
@@ -122,14 +132,15 @@ export function DynamicNetworkGraph({
   // Create an array of vertices with their current positions.
   // This will be passed to the <NetworkGraph /> component,
   // which will render the graph.
-  const verticesWithPositions = vertices.map((v) => {
-    const vertexPos = verticesPositions.get(v.id);
-    if (vertexPos?.cx !== undefined && vertexPos?.cy !== undefined) {
+  const verticesWithPositions = vertices
+    .filter((v) => {
+      const vertexPos = verticesPositions.get(v.id);
+      return vertexPos?.cx !== undefined && vertexPos?.cy !== undefined;
+    })
+    .map((v) => {
+      const vertexPos = verticesPositions.get(v.id);
       return { ...v, position: { cx: vertexPos.cx, cy: vertexPos.cy } };
-    } else {
-      return v;
-    }
-  });
+    });
 
   return (
     <NetworkGraph

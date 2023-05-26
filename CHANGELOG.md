@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- DynamicNetworkGraph: Fix vertex positions before rendering, so they don't jump around after first frame.
+
 ### Changed
 
 ### Removed
