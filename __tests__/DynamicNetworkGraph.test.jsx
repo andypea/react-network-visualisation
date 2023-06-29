@@ -6,6 +6,12 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph.jsx";
 
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
 test("loads a basic graph", async () => {
   // ARRANGE
   render(

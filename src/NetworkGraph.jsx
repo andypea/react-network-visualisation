@@ -3,89 +3,98 @@ import PropTypes from "prop-types";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
 import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
+import { forwardRef } from "react";
 
 /**
  * A static (by default) network graph.
  */
-export function NetworkGraph({
-  VertexWrapper = StaticVertexWrapper,
-  VertexRender = DefaultVertexElement,
-  EdgeRender = DefaultEdgeElement,
-  width = 100,
-  height = 100,
-  vertices = [],
-  edges = [],
-  backgroundColour = "white",
-  stroke = "black",
-  ...otherProps
-}) {
-  // Create random positions for all vertices that aren't supplied with a position.
-  const verticesPositions = new Map(
-    vertices.map(({ id, position }) => [
-      id,
-      {
-        position: position ?? {
-          cx: width * Math.random(),
-          cy: height * Math.random(),
+export const NetworkGraph = forwardRef(
+  (
+    {
+      VertexWrapper = StaticVertexWrapper,
+      VertexRender = DefaultVertexElement,
+      EdgeRender = DefaultEdgeElement,
+      width = 100,
+      height = 100,
+      vertices = [],
+      edges = [],
+      backgroundColour = "white",
+      stroke = "black",
+      ...otherProps
+    },
+    ref
+  ) => {
+    // Create random positions for all vertices that aren't supplied with a position.
+    const verticesPositions = new Map(
+      vertices.map(({ id, position }) => [
+        id,
+        {
+          position: position ?? {
+            cx: width * Math.random(),
+            cy: height * Math.random(),
+          },
         },
-      },
-    ])
-  );
+      ])
+    );
 
-  return (
-    <svg
-      width={width}
-      height={height}
-      className="network-graph"
-      {...otherProps}
-    >
-      <rect
-        x="0"
-        y="0"
+    return (
+      <svg
         width={width}
         height={height}
-        fill={backgroundColour}
-        stroke={stroke}
-      />
-      <g>
+        className="network-graph"
+        ref={ref}
+        {...otherProps}
+      >
+        <rect
+          x="0"
+          y="0"
+          width={width}
+          height={height}
+          fill={backgroundColour}
+          stroke={stroke}
+        />
         <g>
-          {
-            // Place all edges above the vertices in the SVG, so they don't obscure them.
-            edges
-              .filter(
-                // Don't try and render any edges to non-existent vertices.
-                (e) =>
-                  verticesPositions.has(e.source) &&
-                  verticesPositions.has(e.target)
-              )
-              .map((e) => {
-                return (
-                  <EdgeRender
-                    key={e.id}
-                    source={verticesPositions.get(e.source).position}
-                    target={verticesPositions.get(e.target).position}
-                  />
-                );
-              })
-          }
+          <g>
+            {
+              // Place all edges above the vertices in the SVG, so they don't obscure them.
+              edges
+                .filter(
+                  // Don't try and render any edges to non-existent vertices.
+                  (e) =>
+                    verticesPositions.has(e.source) &&
+                    verticesPositions.has(e.target)
+                )
+                .map((e) => {
+                  return (
+                    <EdgeRender
+                      key={e.id}
+                      source={verticesPositions.get(e.source).position}
+                      target={verticesPositions.get(e.target).position}
+                    />
+                  );
+                })
+            }
+          </g>
+          <g>
+            {vertices.map((v) => (
+              <VertexWrapper
+                key={v.id}
+                id={v.id}
+                cx={verticesPositions.get(v.id).position.cx}
+                cy={verticesPositions.get(v.id).position.cy}
+                VertexRender={VertexRender}
+                vertexSpecification={v}
+                backgroundColour={backgroundColour}
+              />
+            ))}
+          </g>
         </g>
-        <g>
-          {vertices.map((v) => (
-            <VertexWrapper
-              key={v.id}
-              id={v.id}
-              cx={verticesPositions.get(v.id).position.cx}
-              cy={verticesPositions.get(v.id).position.cy}
-              VertexRender={VertexRender}
-              vertexSpecification={v}
-              backgroundColour={backgroundColour}
-            />
-          ))}
-        </g>
-      </g>
-    </svg>
-  );
-}
+      </svg>
+    );
+  }
+);
+
+NetworkGraph.displayName = "NetworkGraph";
 
 NetworkGraph.propTypes = {
   /**

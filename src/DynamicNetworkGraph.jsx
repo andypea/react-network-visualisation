@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./defaultNumericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
@@ -23,6 +23,17 @@ export function DynamicNetworkGraph({
 } = {}) {
   // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) =>
+      console.log(entries)
+    );
+
+    resizeObserver.observe(ref.current);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   // Update the vertex positions on each frame.
   useEffect(() => {
@@ -154,6 +165,7 @@ export function DynamicNetworkGraph({
       stroke={stroke}
       backgroundColour={backgroundColour}
       {...otherProps}
+      ref={ref}
     />
   );
 }
