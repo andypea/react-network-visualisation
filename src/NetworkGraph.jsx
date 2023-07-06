@@ -26,7 +26,7 @@ export const NetworkGraph = ({
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
   preserveAspectRatio = false,
-  margin = 30, // Should this be in em?
+  margin = 30,
   ...otherProps
 }) => {
   const [size, setSize] = useState([undefined, undefined]);
