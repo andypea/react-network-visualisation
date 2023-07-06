@@ -7,36 +7,37 @@ export default {
   component: DynamicNetworkGraph,
   tags: ["autodocs"],
   args: {
-    width: 400,
-    height: 400,
+    width: "100%",
+    height: "100%",
+    viewSize: [100, 100],
     vertices: [
-      { id: "One", fill: "red", label: "One", position: { cx: 100, cy: 100 } },
+      { id: "One", fill: "red", label: "One", position: { cx: 25, cy: 25 } },
       {
         id: "Two",
         fill: "orange",
         label: "Two",
-        position: { cx: 300, cy: 100 },
+        position: { cx: 75, cy: 25 },
       },
       {
         id: "Three",
         fill: "yellow",
         label: "Three",
-        position: { cx: 100, cy: 300 },
+        position: { cx: 25, cy: 75 },
       },
       {
         id: "Four",
         fill: "green",
         label: "Four",
-        position: { cx: 300, cy: 300 },
+        position: { cx: 75, cy: 75 },
       },
     ],
     edges: [
-      { id: "OneTwo", source: "One", target: "Two", length: 100 },
-      { id: "OneThree", source: "One", target: "Three", length: 100 },
-      { id: "OneFour", source: "One", target: "Four", length: 100 },
-      { id: "TwoThree", source: "Two", target: "Three", length: 100 },
-      { id: "TwoFour", source: "Two", target: "Four", length: 100 },
-      { id: "ThreeFour", source: "Three", target: "Four", length: 100 },
+      { id: "OneTwo", source: "One", target: "Two", length: 10 * 3 },
+      { id: "OneThree", source: "One", target: "Three", length: 10 * 4 },
+      { id: "OneFour", source: "One", target: "Four", length: 10 * 5 },
+      { id: "TwoThree", source: "Two", target: "Three", length: 10 * 5 },
+      { id: "TwoFour", source: "Two", target: "Four", length: 10 * 4 },
+      { id: "ThreeFour", source: "Three", target: "Four", length: 10 * 3 },
     ],
   },
 };
@@ -48,41 +49,41 @@ export const Māhutonga = {
         id: "Gacrux",
         label: "Gacrux",
         fill: "yellow",
-        position: { cx: 200, cy: 100 },
+        position: { cx: 50, cy: 33 },
       },
       {
         id: "Mimosa",
         label: "Mimosa",
         fill: "white",
-        position: { cx: 100, cy: 150 },
+        position: { cx: 25, cy: 38 },
       },
       {
         id: "Acrux",
         label: "Acrux",
         fill: "white",
-        position: { cx: 200, cy: 250 },
+        position: { cx: 50, cy: 68 },
       },
       {
         id: "Imai",
         label: "Imai",
         fill: "white",
-        position: { cx: 300, cy: 125 },
+        position: { cx: 75, cy: 31 },
       },
       {
         id: "Ginan",
         label: "Ginan",
         fill: "lightblue",
-        position: { cx: 240, cy: 250 },
+        position: { cx: 60, cy: 63 },
       },
     ],
     edges: [
-      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux", length: 300 },
-      { id: "MimosaImai", source: "Mimosa", target: "Imai", length: 200 },
+      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux", length: 75 },
+      { id: "MimosaImai", source: "Mimosa", target: "Imai", length: 50 },
     ],
   },
 };
 
-export const Square = {
+export const Rectangle = {
   args: {},
 };
 

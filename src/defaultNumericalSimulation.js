@@ -13,7 +13,6 @@
  * @param {number} [friction] The amount of friction applied to each vertex.
  * @param {number} [timeStep] How far to step forward in each timeStep.
  * @param {number} [springConstant] How springy each edge is.
- * @param {number} [margin] The size of margin around the edge of the graph that vertices will not enter.
  * @param {number} [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 export const updateVerticesPositions = (
@@ -23,10 +22,9 @@ export const updateVerticesPositions = (
   edges,
   vertices,
   friction = 10,
-  timeStep = 0.005,
+  timeStep = 0.003,
   springConstant = 10,
-  margin = 10,
-  interbodyForceStrength = -100000
+  interbodyForceStrength = -1000 // interbodyForceStrength = -100000
 ) => {
   // Drop all unused vertices from the vertex positions Map and add new vertices.
   const newVerticesPositions = reconcileVertexPositions(
@@ -131,14 +129,14 @@ export const updateVerticesPositions = (
       cx: clamp(
         oldPosition.cx +
           (oldPosition.frozen ? 0 : 1) * timeStep * oldPosition.vx,
-        margin,
-        width - margin
+        0,
+        width
       ),
       cy: clamp(
         oldPosition.cy +
           (oldPosition.frozen ? 0 : 1) * timeStep * oldPosition.vy,
-        margin,
-        height - margin
+        0,
+        height
       ),
       vx: oldPosition.frozen
         ? 0

@@ -7,27 +7,27 @@ export default {
   component: NetworkGraph,
   tags: ["autodocs"],
   args: {
-    width: 400,
-    height: 400,
+    width: "100%",
+    height: "100%",
     vertices: [
-      { id: "One", fill: "red", label: "Foo", position: { cx: 100, cy: 100 } },
+      { id: "One", fill: "red", label: "One", position: { cx: 25, cy: 25 } },
       {
         id: "Two",
         fill: "orange",
-        label: "Bar",
-        position: { cx: 300, cy: 100 },
+        label: "Two",
+        position: { cx: 75, cy: 25 },
       },
       {
         id: "Three",
         fill: "yellow",
         label: "Three",
-        position: { cx: 100, cy: 300 },
+        position: { cx: 25, cy: 75 },
       },
       {
         id: "Four",
         fill: "green",
         label: "Four",
-        position: { cx: 300, cy: 300 },
+        position: { cx: 75, cy: 75 },
       },
     ],
     edges: [
@@ -48,31 +48,31 @@ export const Māhutonga = {
         id: "Gacrux",
         label: "Gacrux",
         fill: "yellow",
-        position: { cx: 200, cy: 50 },
+        position: { cx: 50, cy: 13 },
       },
       {
         id: "Mimosa",
         label: "Mimosa",
         fill: "white",
-        position: { cx: 100, cy: 150 },
+        position: { cx: 25, cy: 38 },
       },
       {
         id: "Acrux",
         label: "Acrux",
         fill: "white",
-        position: { cx: 200, cy: 350 },
+        position: { cx: 50, cy: 88 },
       },
       {
         id: "Imai",
         label: "Imai",
         fill: "white",
-        position: { cx: 300, cy: 125 },
+        position: { cx: 75, cy: 31 },
       },
       {
         id: "Ginan",
         label: "Ginan",
         fill: "lightblue",
-        position: { cx: 240, cy: 250 },
+        position: { cx: 60, cy: 63 },
       },
     ],
     edges: [
@@ -86,12 +86,12 @@ export const Square = {
   args: {},
 };
 
-export const RandomTriangle = {
+export const Triangle = {
   args: {
     vertices: [
-      { id: "A", fill: "indigo", label: "A" },
-      { id: "B", fill: "violet", label: "B" },
-      { id: "C", fill: "black", label: "C" },
+      { id: "A", fill: "indigo", label: "A", position: { cx: 0, cy: 0 } },
+      { id: "B", fill: "violet", label: "B", position: { cx: 100, cy: 50 } },
+      { id: "C", fill: "black", label: "C", position: { cx: 0, cy: 100 } },
     ],
     edges: [
       { id: "AB", source: "A", target: "B" },

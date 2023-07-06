@@ -14,7 +14,7 @@
   ],
   "overrides": [
     {
-      "files": ["__tests__/**"],
+      "files": ["tests/**/*"],
       "plugins": ["eslint-plugin-jest"],
       "extends": ["plugin:jest/recommended", "plugin:jest/style"]
     }

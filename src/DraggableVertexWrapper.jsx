@@ -34,10 +34,18 @@ export const DraggableVertexWrapper = (props) => {
         event.pageX,
         event.pageY
       );
+      const pointerSvgPosition = [
+        pointerScreenPosition.x - offset.x,
+        pointerScreenPosition.y - offset.y,
+      ];
+
+      const pointerGraphPosition =
+        props.svgToGraphTransform(pointerSvgPosition);
+
       // const pointerLocalPosition = pointerScreenPosition.matrixTransform(screenToLocalTransformationMatrix.inverse());
       props.moveVertex(props.id, {
-        x: pointerScreenPosition.x - offset.x,
-        y: pointerScreenPosition.y - offset.y,
+        x: pointerGraphPosition[0],
+        y: pointerGraphPosition[1],
       });
     }
   };
@@ -109,4 +117,9 @@ DraggableVertexWrapper.propTypes = {
    * The background colour of the network graph.
    */
   backgroundColour: PropTypes.string,
+
+  /**
+   * Function which transforms coordinates from SVG space into graph space.
+   */
+  svgToGraphTransform: PropTypes.func,
 };

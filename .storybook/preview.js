@@ -15,6 +15,9 @@ const preview = {
         order: ["Introduction", "Changelog"],
       },
     },
+    docs: {
+      story: { inline: false, iframeHeight: 400 },
+    },
   },
   docs: {
     theme: customTheme,

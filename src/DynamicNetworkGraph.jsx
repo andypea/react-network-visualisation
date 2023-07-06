@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { updateVerticesPositions } from "./defaultNumericalSimulation.js";
 import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
@@ -6,12 +6,13 @@ import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
 import { NetworkGraph } from "./NetworkGraph.jsx";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
 
+const defaultViewSize = [100, 100];
+const defaultViewOrigin = [0, 0];
+
 /**
  * Dynamic network graph with draggable vertices.
  */
 export function DynamicNetworkGraph({
-  width = 100,
-  height = 100,
   vertices = [],
   edges = [],
   backgroundColour = "white",
@@ -19,29 +20,20 @@ export function DynamicNetworkGraph({
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
   vertexPositionUpdater = updateVerticesPositions,
+  viewOrigin = defaultViewOrigin,
+  viewSize = defaultViewSize,
   ...otherProps
 } = {}) {
   // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) =>
-      console.log(entries)
-    );
-
-    resizeObserver.observe(ref.current);
-
-    return () => resizeObserver.disconnect();
-  }, []);
 
   // Update the vertex positions on each frame.
   useEffect(() => {
     setVerticesPositions((oldVerticesPositions) =>
       vertexPositionUpdater(
         oldVerticesPositions,
-        width,
-        height,
+        viewSize[0],
+        viewSize[1],
         edges,
         vertices
       )
@@ -53,8 +45,8 @@ export function DynamicNetworkGraph({
       setVerticesPositions((oldVerticesPositions) =>
         vertexPositionUpdater(
           oldVerticesPositions,
-          width,
-          height,
+          viewSize[0],
+          viewSize[1],
           edges,
           vertices
         )
@@ -74,7 +66,7 @@ export function DynamicNetworkGraph({
 
     start();
     return () => stop();
-  }, [width, height, edges, vertices, vertexPositionUpdater]);
+  }, [viewSize, edges, vertices, vertexPositionUpdater]);
 
   /**
    * Manually move a vertex.
@@ -158,14 +150,13 @@ export function DynamicNetworkGraph({
       VertexWrapper={VertexWrapper}
       VertexRender={VertexRender}
       EdgeRender={EdgeRender}
-      width={width}
-      height={height}
+      viewOrigin={viewOrigin}
+      viewSize={viewSize}
       edges={edges}
       vertices={verticesWithPositions}
       stroke={stroke}
       backgroundColour={backgroundColour}
       {...otherProps}
-      ref={ref}
     />
   );
 }
@@ -174,12 +165,12 @@ DynamicNetworkGraph.propTypes = {
   /**
    * Width of the graph in pixels.
    */
-  width: PropTypes.number,
+  width: PropTypes.string,
 
   /**
    * Height of the graph in pixels.
    */
-  height: PropTypes.number,
+  height: PropTypes.string,
 
   /**
    * Array of containing all edges in the graph.
@@ -215,4 +206,14 @@ DynamicNetworkGraph.propTypes = {
    * Function that updates the vertex positions on each frame.
    */
   vertexPositionUpdater: PropTypes.func,
+
+  /**
+   * The origin of the rectangle to be viewed (in graph units).
+   */
+  viewOrigin: PropTypes.arrayOf(PropTypes.number),
+
+  /**
+   * The size of the rectangle to be viewed (in graph units).
+   */
+  viewSize: PropTypes.arrayOf(PropTypes.number),
 };

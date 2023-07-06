@@ -5,42 +5,33 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph.jsx";
+import { ResizeObserver } from "./mocks/resizeObserver.mock";
 
-global.ResizeObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
-}));
+global.ResizeObserver = ResizeObserver;
 
 test("loads a basic graph", async () => {
-  // ARRANGE
   render(
     <DynamicNetworkGraph
       data-testid="network-graph"
       vertices={[
-        {
-          id: "One",
-          fill: "red",
-          label: "One",
-          position: { cx: 100, cy: 100 },
-        },
+        { id: "One", fill: "red", label: "One", position: { cx: 25, cy: 25 } },
         {
           id: "Two",
           fill: "orange",
           label: "Two",
-          position: { cx: 300, cy: 100 },
+          position: { cx: 75, cy: 25 },
         },
         {
           id: "Three",
           fill: "yellow",
           label: "Three",
-          position: { cx: 100, cy: 300 },
+          position: { cx: 25, cy: 75 },
         },
         {
           id: "Four",
           fill: "green",
           label: "Four",
-          position: { cx: 300, cy: 300 },
+          position: { cx: 75, cy: 75 },
         },
       ]}
       edges={[
@@ -54,7 +45,6 @@ test("loads a basic graph", async () => {
 
   const networkGraphElement = screen.getByTestId("network-graph");
 
-  // ASSERT
   expect(networkGraphElement.getElementsByTagName("line")).toHaveLength(4);
   expect(networkGraphElement.getElementsByTagName("circle")).toHaveLength(4);
 });
