@@ -179,16 +179,6 @@ NetworkGraph.displayName = "NetworkGraph";
 
 NetworkGraph.propTypes = {
   /**
-   * Width of the SVG.
-   */
-  width: PropTypes.string,
-
-  /**
-   * Height of the SVG.
-   */
-  height: PropTypes.string,
-
-  /**
    * Array of containing all edges in the graph.
    */
   edges: PropTypes.array,

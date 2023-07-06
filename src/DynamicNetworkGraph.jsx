@@ -163,16 +163,6 @@ export function DynamicNetworkGraph({
 
 DynamicNetworkGraph.propTypes = {
   /**
-   * Width of the graph in pixels.
-   */
-  width: PropTypes.string,
-
-  /**
-   * Height of the graph in pixels.
-   */
-  height: PropTypes.string,
-
-  /**
    * Array of containing all edges in the graph.
    */
   edges: PropTypes.array,
