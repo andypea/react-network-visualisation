@@ -15,6 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.0] - 2023-07-06
+
+### Changed
+
+- Made the graph automatically rescale when the SVG is resized.
+
 ## [0.2.1] - 2023-05-26
 
 ### Fixed
@@ -47,7 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `<NetworkGraph />` renders a static network graph.
 - `<DynamicNetworkGraph />` renders a dynamic network graph with draggable vertices.
 
-[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.2.1...HEAD
+[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.3.0
 [0.2.1]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.2.1
 [0.2.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.2.0
 [0.1.2]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.1.2
