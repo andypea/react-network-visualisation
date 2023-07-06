@@ -234,7 +234,13 @@ NetworkGraph.propTypes = {
    */
   viewSize: PropTypes.arrayOf(PropTypes.number),
 
+  /**
+   * Whether to preserve the aspect ratio when mapping from Graph coords to SVG coords.
+   */
   preserveAspectRatio: PropTypes.bool,
 
+  /**
+   * The size of the margin to place around the graph (in SVG pixels)/
+   */
   margin: PropTypes.number,
 };
