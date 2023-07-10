@@ -9,6 +9,54 @@ import {
   svgPositionToGraphPosition,
 } from "./coordinateTransformations.js";
 
+export interface VertexWrapperProps {
+  id: string;
+  cx: number;
+  cy: number;
+  VertexRender: React.FunctionComponent<VertexElementProps>;
+  vertexSpecification: vertexSpecification;
+  backgroundColour: string;
+  svgToGraphTransform: (
+    svgPosition: readonly [number, number]
+  ) => readonly [number, number];
+}
+
+export interface NetworkGraphProps {
+  VertexWrapper?: React.FunctionComponent<VertexWrapperProps>;
+  VertexRender?: React.FunctionComponent<VertexElementProps>;
+  EdgeRender?: React.FunctionComponent<EdgeElementProps>;
+  vertices?: Array<vertexSpecification>;
+  edges?: Array<edgeSpecification>;
+  backgroundColour?: string;
+  stroke?: string;
+  viewOrigin?: readonly [number, number];
+  viewSize?: readonly [number, number];
+  preserveAspectRatio?: boolean;
+  margin?: number;
+}
+
+export interface VertexElementProps {
+  vertexSpecification: vertexSpecification;
+  backgroundColour: string;
+}
+
+export interface vertexSpecification {
+  id: string;
+  position?: { cx: number; cy: number };
+}
+
+export interface EdgeElementProps {
+  source: { cx: number; cy: number };
+  target: { cx: number; cy: number };
+}
+
+export interface edgeSpecification {
+  id: string;
+  source: string;
+  target: string;
+  length?: number;
+}
+
 const defaultViewOrigin: readonly [number, number] = [0, 0];
 const defaultViewSize: readonly [number, number] = [100, 100];
 

@@ -27,7 +27,8 @@ interface force {
  * @param [springConstant] How springy each edge is.
  * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
-export const updateVerticesPositions = (
+
+export const updateVerticesPositions: updateVerticesPositions = (
   oldVerticesPositions: Map<string, vertexPosition>,
   width: number,
   height: number,
@@ -36,7 +37,7 @@ export const updateVerticesPositions = (
   friction = 10,
   timeStep = 0.003,
   springConstant = 10,
-  interbodyForceStrength = -1000 // interbodyForceStrength = -100000
+  interbodyForceStrength = -1000
 ) => {
   // Drop all unused vertices from the vertex positions Map and add new vertices.
   const newVerticesPositions = reconcileVertexPositions(

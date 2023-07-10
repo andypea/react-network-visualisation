@@ -1,13 +1,55 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { updateVerticesPositions } from "./defaultNumericalSimulation.js";
-import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
-import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
-import { NetworkGraph } from "./NetworkGraph.jsx";
-import { DraggableVertexWrapper } from "./DraggableVertexWrapper.jsx";
+import { updateVerticesPositions } from "./defaultNumericalSimulation";
+import { DefaultVertexElement } from "./DefaultVertexElement";
+import { DefaultEdgeElement } from "./DefaultEdgeElement";
+import {
+  NetworkGraph,
+  vertexSpecification,
+  edgeSpecification,
+  VertexElementProps,
+  EdgeElementProps,
+  NetworkGraphProps,
+  VertexWrapperProps,
+} from "./NetworkGraph";
+import { DraggableVertexWrapper } from "./DraggableVertexWrapper";
 
-const defaultViewSize = [100, 100];
-const defaultViewOrigin = [0, 0];
+const defaultViewSize: readonly [number, number] = [100, 100];
+const defaultViewOrigin: readonly [number, number] = [0, 0];
+
+export interface vertexPosition {
+  cx: number;
+  cy: number;
+  vx: number;
+  vy: number;
+  frozen: boolean;
+}
+
+export interface updateVerticesPositions {
+  (
+    oldVerticesPositions: Map<string, vertexPosition>,
+    width: number,
+    height: number,
+    edges: Array<edgeSpecification>,
+    vertices: Array<vertexSpecification>,
+    friction?: number,
+    timeStep?: number,
+    springConstant?: number,
+    interbodyForceStrength?: number
+  ): Map<string, vertexPosition>;
+}
+
+export interface DynamicNetworkGraphProps {
+  vertices: Array<vertexSpecification>;
+  edges: Array<edgeSpecification>;
+  backgroundColour: string;
+  stroke: string;
+  VertexRender: React.FunctionComponent<VertexElementProps>;
+  EdgeRender: React.FunctionComponent<EdgeElementProps>;
+  vertexPositionUpdater: updateVerticesPositions;
+  viewOrigin: readonly [number, number];
+  viewSize: readonly [number, number];
+}
 
 /**
  * Dynamic network graph with draggable vertices.
@@ -23,7 +65,7 @@ export function DynamicNetworkGraph({
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
   ...otherProps
-} = {}) {
+}: DynamicNetworkGraphProps) {
   // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
 
@@ -39,7 +81,7 @@ export function DynamicNetworkGraph({
       )
     );
 
-    let frameId = null;
+    let frameId: number | null = null;
 
     function onFrame() {
       setVerticesPositions((oldVerticesPositions) =>
@@ -60,8 +102,10 @@ export function DynamicNetworkGraph({
     }
 
     function stop() {
-      cancelAnimationFrame(frameId);
-      frameId = null;
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+      }
     }
 
     start();
@@ -75,15 +119,18 @@ export function DynamicNetworkGraph({
    * @param {string} id - ID of the vertex to move.
    * @param {Object} position - New position for the vertex.
    */
-  const moveVertex = useCallback((id, position) => {
-    setVerticesPositions((oldVerticesPositions) =>
-      new Map(oldVerticesPositions.entries()).set(id, {
-        ...oldVerticesPositions.get(id),
-        cx: position.x,
-        cy: position.y,
-      })
-    );
-  }, []);
+  const moveVertex = useCallback(
+    (id: string, position: { x: number; y: number }) => {
+      setVerticesPositions((oldVerticesPositions) =>
+        new Map(oldVerticesPositions.entries()).set(id, {
+          ...oldVerticesPositions.get(id),
+          cx: position.x,
+          cy: position.y,
+        })
+      );
+    },
+    []
+  );
 
   /**
    * Stop automatically updating the vertex position.
@@ -91,7 +138,7 @@ export function DynamicNetworkGraph({
    *
    * @param {string} id - ID of the vertex to move.
    */
-  const freezeVertex = useCallback((id) => {
+  const freezeVertex = useCallback((id: string) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
         ...oldVerticesPositions.get(id),
@@ -106,7 +153,7 @@ export function DynamicNetworkGraph({
    *
    * @param {string} id - ID of the vertex to move.
    */
-  const unfreezeVertex = useCallback((id) => {
+  const unfreezeVertex = useCallback((id: string) => {
     setVerticesPositions((oldVerticesPositions) =>
       new Map(oldVerticesPositions.entries()).set(id, {
         ...oldVerticesPositions.get(id),
@@ -119,7 +166,7 @@ export function DynamicNetworkGraph({
   // The use of `useCallback` prevents the vertices being
   // recreated by React on every frame.
   const VertexWrapper = useCallback(
-    (props) => {
+    (props: VertexWrapperProps) => {
       return (
         <DraggableVertexWrapper
           {...props}
