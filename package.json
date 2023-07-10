@@ -9,9 +9,11 @@
   "type": "module",
   "files": [
     "package.json",
-    "README.me",
+    "README.md",
     "CHANGELOG.md",
-    "dist",
+    "dist/react-simple-network-graph.d.ts",
+    "dist/react-simple-network-graph.js",
+    "dist/react-simple-network-graph.csj",
     "src"
   ],
   "types": "./dist/react-simple-network-graph.d.ts",
