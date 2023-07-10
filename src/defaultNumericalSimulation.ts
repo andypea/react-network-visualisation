@@ -1,9 +1,5 @@
-interface edgeSpecification {
-  id: string;
-  source: string;
-  target: string;
-  length?: number;
-}
+import { updateVerticesPositions, vertexPosition } from "./DynamicNetworkGraph";
+import { vertexSpecification } from "./NetworkGraph";
 
 interface force {
   x: number;
@@ -28,12 +24,12 @@ interface force {
  * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 
-export const updateVerticesPositions: updateVerticesPositions = (
-  oldVerticesPositions: Map<string, vertexPosition>,
-  width: number,
-  height: number,
-  edges: Array<edgeSpecification>,
-  vertices: Array<vertexSpecification>,
+export const updateVerticesPositionsImp: updateVerticesPositions = (
+  oldVerticesPositions,
+  width,
+  height,
+  edges,
+  vertices,
   friction = 10,
   timeStep = 0.003,
   springConstant = 10,

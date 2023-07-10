@@ -1,2 +1,2 @@
-export { NetworkGraph } from "./NetworkGraph.jsx";
-export { DynamicNetworkGraph } from "./DynamicNetworkGraph.jsx";
+export { NetworkGraph } from "./NetworkGraph";
+export { DynamicNetworkGraph } from "./DynamicNetworkGraph";

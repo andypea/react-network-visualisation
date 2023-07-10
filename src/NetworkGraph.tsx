@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 
-import { DefaultVertexElement } from "./DefaultVertexElement.jsx";
-import { DefaultEdgeElement } from "./DefaultEdgeElement.jsx";
-import { StaticVertexWrapper } from "./StaticVertexWrapper.jsx";
+import { DefaultVertexElement } from "./DefaultVertexElement";
+import { DefaultEdgeElement } from "./DefaultEdgeElement";
+import { StaticVertexWrapper } from "./StaticVertexWrapper";
 import { useCallback, useRef, useState, useMemo } from "react";
 import {
   graphPositionToSvgPosition,
   svgPositionToGraphPosition,
-} from "./coordinateTransformations.js";
+} from "./coordinateTransformations";
 
 export interface VertexWrapperProps {
   id: string;

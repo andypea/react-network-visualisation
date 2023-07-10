@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import { VertexWrapperProps } from "./NetworkGraph";
+
 /**
  * A component that wraps each vertex and sets the position.
  */

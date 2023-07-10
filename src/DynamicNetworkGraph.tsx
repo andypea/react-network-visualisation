@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { updateVerticesPositions } from "./defaultNumericalSimulation";
+import { updateVerticesPositionsImp } from "./defaultNumericalSimulation";
 import { DefaultVertexElement } from "./DefaultVertexElement";
 import { DefaultEdgeElement } from "./DefaultEdgeElement";
 import {
@@ -9,7 +9,6 @@ import {
   edgeSpecification,
   VertexElementProps,
   EdgeElementProps,
-  NetworkGraphProps,
   VertexWrapperProps,
 } from "./NetworkGraph";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper";
@@ -61,7 +60,7 @@ export function DynamicNetworkGraph({
   stroke = "black",
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
-  vertexPositionUpdater = updateVerticesPositions,
+  vertexPositionUpdater = updateVerticesPositionsImp,
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
   ...otherProps
