@@ -1,3 +1,22 @@
+interface vertexSpecification {
+  id: string;
+  position?: { cx: number; cy: number };
+}
+
+interface edgeSpecification {
+  id: string;
+  source: string;
+  target: string;
+  length?: number;
+}
+
+interface vertexPosition {}
+
+interface force {
+  x: number;
+  y: number;
+}
+
 /**
  * Update the vertex positions.
  *
@@ -5,22 +24,22 @@
  * until they approach the lengths requested in their specification.
  * Also includes a term which will push vertices apart.
  *
- * @param {Object[]} oldVerticesPositions The pre-update vertex postions.
- * @param {number} width The max x-value of each vertex.
- * @param {number} height The max y-value of each vertex.
- * @param {Object[]} edges Edge specification for the graph. Each edge to optimise should have a `length` property.
- * @param {Object[]} vertices Vertex specification for the graph. Any vertex positions included will be ignored.
- * @param {number} [friction] The amount of friction applied to each vertex.
- * @param {number} [timeStep] How far to step forward in each timeStep.
- * @param {number} [springConstant] How springy each edge is.
- * @param {number} [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
+ * @param oldVerticesPositions The pre-update vertex postions.
+ * @param width The max x-value of each vertex.
+ * @param height The max y-value of each vertex.
+ * @param edges Edge specification for the graph. Each edge to optimise should have a `length` property.
+ * @param vertices Vertex specification for the graph. Any vertex positions included will be ignored.
+ * @param [friction] The amount of friction applied to each vertex.
+ * @param [timeStep] How far to step forward in each timeStep.
+ * @param [springConstant] How springy each edge is.
+ * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 export const updateVerticesPositions = (
-  oldVerticesPositions,
-  width,
-  height,
-  edges,
-  vertices,
+  oldVerticesPositions: Map<string, vertexPosition>,
+  width: number,
+  height: number,
+  edges: Array<edgeSpecification>,
+  vertices: Array<vertexSpecification>,
   friction = 10,
   timeStep = 0.003,
   springConstant = 10,
@@ -34,12 +53,14 @@ export const updateVerticesPositions = (
     height
   );
 
-  const forces = new Map(vertices.map((vertex) => [vertex.id, { x: 0, y: 0 }]));
+  const forces: Map<string, force> = new Map(
+    vertices.map((vertex) => [vertex.id, { x: 0, y: 0 }])
+  );
 
   // Add a force representing friction to each vertex.
   for (const vertex of vertices) {
     const vertexPosition = newVerticesPositions.get(vertex.id);
-    const force = forces.get(vertex.id);
+    const force = forces.get(vertex.id) ?? { x: 0, y: 0 };
 
     forces.set(vertex.id, {
       x: force.x - friction * vertexPosition.vx,
@@ -71,13 +92,13 @@ export const updateVerticesPositions = (
       y: (forceScalar * (target.cy - source.cy)) / distance,
     };
 
-    const forceSource = forces.get(e.source);
+    const forceSource = forces.get(e.source) ?? { x: 0, y: 0 };
     forces.set(e.source, {
       x: forceSource.x + forceSourceToTarget.x,
       y: forceSource.y + forceSourceToTarget.y,
     });
 
-    const forceTarget = forces.get(e.target);
+    const forceTarget = forces.get(e.target) ?? { x: 0, y: 0 };
     forces.set(e.target, {
       x: forceTarget.x - forceSourceToTarget.x,
       y: forceTarget.y - forceSourceToTarget.y,
@@ -107,8 +128,8 @@ export const updateVerticesPositions = (
         y: interbodyForceStrength * offset.y * oneOverdistanceCubed,
       };
 
-      const forceI = forces.get(vertexIId);
-      const forceJ = forces.get(vertexJId);
+      const forceI = forces.get(vertexIId) ?? { x: 0, y: 0 };
+      const forceJ = forces.get(vertexJId) ?? { x: 0, y: 0 };
 
       forces.set(vertexIId, {
         x: forceI.x + newForceOnI.x,
@@ -140,10 +161,10 @@ export const updateVerticesPositions = (
       ),
       vx: oldPosition.frozen
         ? 0
-        : oldPosition.vx + timeStep * forces.get(vertex.id).x,
+        : oldPosition.vx + timeStep * (forces.get(vertex.id)?.x ?? 0),
       vy: oldPosition.frozen
         ? 0
-        : oldPosition.vy + timeStep * forces.get(vertex.id).y,
+        : oldPosition.vy + timeStep * (forces.get(vertex.id)?.y ?? 0),
       frozen: oldPosition.frozen,
     });
   }
@@ -152,10 +173,10 @@ export const updateVerticesPositions = (
 };
 
 const reconcileVertexPositions = (
-  vertices,
-  oldVerticesPositions,
-  width,
-  height
+  vertices: Array<vertexSpecification>,
+  oldVerticesPositions: Map<string, vertexPosition>,
+  width: number,
+  height: number
 ) => {
   const newVerticesPositions = new Map();
 
@@ -182,4 +203,5 @@ const reconcileVertexPositions = (
   return newVerticesPositions;
 };
 
-const clamp = (x, min, max) => Math.min(Math.max(x, min), max);
+const clamp = (x: number, min: number, max: number) =>
+  Math.min(Math.max(x, min), max);
