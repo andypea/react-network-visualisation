@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
+import { VertexWrapperProps } from "./NetworkGraph";
 
 interface DraggableVertexWrapperProps extends VertexWrapperProps {
   freezeVertex: (id: string) => void;

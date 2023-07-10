@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { VertexElementProps } from "./NetworkGraph";
 
 /**
  * The default component to render at each vertex.

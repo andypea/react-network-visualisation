@@ -22,12 +22,14 @@
     "test": "jest",
     "prettier": "prettier --check --ignore-path=.gitignore .",
     "lint": "eslint --ignore-path=.gitignore --ext=js,jsx .",
-    "build": "rollup --config",
+    "build:js": "rollup --config",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run buld:types && npm run build:js",
+    "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "include-local-gitconfig": "git config --local include.path ../.gitconfig",
-    "prepublishOnly": "jest && git diff --exit-code && git diff --cached --exit-code && git restore . && node scripts/gitTagMatchesPackageVersion.js && git clean -fdx && npm ci && npm run build",
-    "type-check": "tsc --noEmit"
+    "prepublishOnly": "jest && git diff --exit-code && git diff --cached --exit-code && git restore . && node scripts/gitTagMatchesPackageVersion.js && git clean -fdx && npm ci && npm run build"
   },
   "keywords": [
     "react",
