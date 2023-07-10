@@ -1,5 +1,11 @@
 export const graphPositionToSvgPosition =
-  (viewOrigin, viewSize, size, margin) => (graphPosition) => {
+  (
+    viewOrigin: readonly [number, number],
+    viewSize: readonly [number, number],
+    size: readonly [number, number],
+    margin: number
+  ) =>
+  (graphPosition: [number, number]) => {
     const scalingFactor = Math.min(
       (size[0] - 2 * margin) / viewSize[0],
       (size[1] - 2 * margin) / viewSize[1]
@@ -16,7 +22,13 @@ export const graphPositionToSvgPosition =
   };
 
 export const svgPositionToGraphPosition =
-  (viewOrigin, viewSize, size, margin) => (svgPosition) => {
+  (
+    viewOrigin: readonly [number, number],
+    viewSize: readonly [number, number],
+    size: readonly [number, number],
+    margin: number
+  ) =>
+  (svgPosition: readonly [number, number]) => {
     const scalingFactor = Math.min(
       (size[0] - 2 * margin) / viewSize[0],
       (size[1] - 2 * margin) / viewSize[1]

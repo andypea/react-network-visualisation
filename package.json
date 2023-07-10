@@ -26,7 +26,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "include-local-gitconfig": "git config --local include.path ../.gitconfig",
-    "prepublishOnly": "jest && git diff --exit-code && git diff --cached --exit-code && git restore . && node scripts/gitTagMatchesPackageVersion.js && git clean -fdx && npm ci && npm run build"
+    "prepublishOnly": "jest && git diff --exit-code && git diff --cached --exit-code && git restore . && node scripts/gitTagMatchesPackageVersion.js && git clean -fdx && npm ci && npm run build",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [
     "react",
@@ -79,7 +80,8 @@
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "2.8.8",
     "rollup": "^3.21.4",
-    "storybook": "^7.0.8"
+    "storybook": "^7.0.8",
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.2.0",
