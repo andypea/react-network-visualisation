@@ -10,11 +10,11 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      file: "dist/bundle.cjs",
+      file: "dist/react-simple-network-graph.cjs",
       format: "cjs",
     },
     {
-      file: "dist/bundle.js",
+      file: "dist/react-simple-network-graph.js",
       format: "es",
     },
   ],

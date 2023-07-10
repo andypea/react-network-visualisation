@@ -5,7 +5,7 @@
   "repository": "https://github.com/andypea/react-simple-network-graph",
   "bugs": "https://github.com/andypea/react-simple-network-graph/issues",
   "homepage": "https://andypea.github.io/react-simple-network-graph",
-  "main": "dist/bundle.cjs",
+  "main": "dist/react-simple-network-graph.cjs",
   "type": "module",
   "files": [
     "package.json",
@@ -15,8 +15,8 @@
     "src"
   ],
   "exports": {
-    "import": "./dist/bundle.js",
-    "require": "./dist/bundle.csj"
+    "import": "./dist/react-simple-network-graph.js",
+    "require": "./dist/react-simple-network-graph.csj"
   },
   "scripts": {
     "test": "jest",
