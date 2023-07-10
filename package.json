@@ -24,7 +24,7 @@
     "lint": "eslint --ignore-path=.gitignore --ext=js,jsx .",
     "build:js": "rollup --config",
     "build:types": "tsc --emitDeclarationOnly",
-    "build": "npm run buld:types && npm run build:js",
+    "build": "npm run build:types && npm run build:js",
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
