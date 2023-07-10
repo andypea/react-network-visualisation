@@ -1,15 +1,10 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { StaticVertexWrapperProps } from "./StaticVertexWrapper";
 
-interface DraggableVertexWrapperProps extends StaticVertexWrapperProps {
-  id: string;
+interface DraggableVertexWrapperProps extends VertexWrapperProps {
   freezeVertex: (id: string) => void;
   unfreezeVertex: (id: string) => void;
   moveVertex: (id: string, position: { x: number; y: number }) => void;
-  svgToGraphTransform: (
-    svgPosition: readonly [number, number]
-  ) => [number, number];
 }
 
 /**

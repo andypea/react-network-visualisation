@@ -40,10 +40,14 @@ DefaultVertexElement.propTypes = {
   /**
    * The vertex specification supplied to the network graph.
    */
-  vertexSpecification: PropTypes.object,
+  vertexSpecification: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    fill: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 
   /**
    * The background colour of the network graph.
    */
-  backgroundColour: PropTypes.string,
+  backgroundColour: PropTypes.string.isRequired,
 };

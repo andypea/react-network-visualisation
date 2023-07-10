@@ -19,10 +19,16 @@ DefaultEdgeElement.propTypes = {
   /**
    * The position of the source vertex.
    */
-  source: PropTypes.object.isRequired,
+  source: PropTypes.exact({
+    cx: PropTypes.number.isRequired,
+    cy: PropTypes.number.isRequired,
+  }).isRequired,
 
   /**
    * The position of the target vertex.
    */
-  target: PropTypes.object.isRequired,
+  target: PropTypes.exact({
+    cx: PropTypes.number.isRequired,
+    cy: PropTypes.number.isRequired,
+  }).isRequired,
 };

@@ -9,8 +9,8 @@ import {
   svgPositionToGraphPosition,
 } from "./coordinateTransformations.js";
 
-const defaultViewOrigin = [0, 0];
-const defaultViewSize = [100, 100];
+const defaultViewOrigin: readonly [number, number] = [0, 0];
+const defaultViewSize: readonly [number, number] = [100, 100];
 
 /**
  * A static (by default) network graph.
@@ -28,8 +28,8 @@ export const NetworkGraph = ({
   preserveAspectRatio = false,
   margin = 30,
   ...otherProps
-}) => {
-  const [size, setSize] = useState([undefined, undefined]);
+}: NetworkGraphProps) => {
+  const [size, setSize] = useState<readonly [number, number]>([150, 150]);
 
   const resizeObserver = useRef(
     new ResizeObserver((entries) => {
@@ -40,7 +40,7 @@ export const NetworkGraph = ({
     })
   );
 
-  const updateResizeObserver = useCallback((node) => {
+  const updateResizeObserver = useCallback((node: SVGSVGElement) => {
     resizeObserver.current.disconnect();
 
     if (node !== null) {
@@ -65,8 +65,8 @@ export const NetworkGraph = ({
         )
         .map(({ id, position }) => {
           const svgPosition = coordinateTransformation([
-            position.cx,
-            position.cy,
+            position?.cx ?? 0,
+            position?.cy ?? 0,
           ]);
           return [
             id,
@@ -94,7 +94,7 @@ export const NetworkGraph = ({
   );
 
   const svgToGraphTransform = useCallback(
-    (svgPosition) => {
+    (svgPosition: readonly [number, number]) => {
       return svgPositionToGraphPosition(
         viewOrigin,
         viewSize,
@@ -143,8 +143,18 @@ export const NetworkGraph = ({
                     return (
                       <EdgeRender
                         key={e.id}
-                        source={verticesPositions.get(e.source).position}
-                        target={verticesPositions.get(e.target).position}
+                        source={
+                          verticesPositions.get(e.source)?.position ?? {
+                            cx: 0,
+                            cy: 0,
+                          }
+                        }
+                        target={
+                          verticesPositions.get(e.target)?.position ?? {
+                            cx: 0,
+                            cy: 0,
+                          }
+                        }
                       />
                     );
                   })
@@ -157,8 +167,8 @@ export const NetworkGraph = ({
                   <VertexWrapper
                     key={v.id}
                     id={v.id}
-                    cx={verticesPositions.get(v.id).position.cx}
-                    cy={verticesPositions.get(v.id).position.cy}
+                    cx={verticesPositions.get(v.id)?.position?.cx ?? 0}
+                    cy={verticesPositions.get(v.id)?.position?.cy ?? 0}
                     VertexRender={VertexRender}
                     vertexSpecification={v}
                     backgroundColour={backgroundColour}
