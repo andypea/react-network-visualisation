@@ -21,7 +21,8 @@ export interface VertexWrapperProps {
   ) => readonly [number, number];
 }
 
-export interface NetworkGraphProps {
+export interface NetworkGraphProps
+  extends React.ComponentPropsWithoutRef<"svg"> {
   VertexWrapper?: React.FunctionComponent<VertexWrapperProps>;
   VertexRender?: React.FunctionComponent<VertexElementProps>;
   EdgeRender?: React.FunctionComponent<EdgeElementProps>;
@@ -31,7 +32,7 @@ export interface NetworkGraphProps {
   stroke?: string;
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
-  preserveAspectRatio?: boolean;
+  preserveGraphAspectRatio?: boolean;
   margin?: number;
 }
 
@@ -42,7 +43,9 @@ export interface VertexElementProps {
 
 export interface vertexSpecification {
   id: string;
-  position?: { cx: number; cy: number };
+  position?: null | { cx: number; cy: number };
+  fill?: null | string;
+  label?: null | string;
 }
 
 export interface EdgeElementProps {
@@ -73,7 +76,7 @@ export const NetworkGraph = ({
   stroke = "black",
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
-  preserveAspectRatio = false,
+  preserveGraphAspectRatio = false,
   margin = 30,
   ...otherProps
 }: NetworkGraphProps) => {
@@ -285,7 +288,7 @@ NetworkGraph.propTypes = {
   /**
    * Whether to preserve the aspect ratio when mapping from Graph coords to SVG coords.
    */
-  preserveAspectRatio: PropTypes.bool,
+  preserveGraphAspectRatio: PropTypes.bool,
 
   /**
    * The size of the margin to place around the graph (in SVG pixels)/

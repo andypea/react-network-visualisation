@@ -26,7 +26,9 @@ StaticVertexWrapper.propTypes = {
     position: PropTypes.exact({
       cx: PropTypes.number.isRequired,
       cy: PropTypes.number.isRequired,
-    }).isRequired,
+    }),
+    fill: PropTypes.string,
+    label: PropTypes.string,
   }).isRequired,
   backgroundColour: PropTypes.string.isRequired,
   svgToGraphTransform: PropTypes.func.isRequired,

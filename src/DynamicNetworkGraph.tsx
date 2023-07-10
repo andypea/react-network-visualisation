@@ -38,16 +38,17 @@ export interface updateVerticesPositions {
   ): Map<string, vertexPosition>;
 }
 
-export interface DynamicNetworkGraphProps {
+export interface DynamicNetworkGraphProps
+  extends React.ComponentPropsWithoutRef<"svg"> {
   vertices: Array<vertexSpecification>;
   edges: Array<edgeSpecification>;
-  backgroundColour: string;
-  stroke: string;
-  VertexRender: React.FunctionComponent<VertexElementProps>;
-  EdgeRender: React.FunctionComponent<EdgeElementProps>;
-  vertexPositionUpdater: updateVerticesPositions;
-  viewOrigin: readonly [number, number];
-  viewSize: readonly [number, number];
+  backgroundColour?: string;
+  stroke?: string;
+  VertexRender?: React.FunctionComponent<VertexElementProps>;
+  EdgeRender?: React.FunctionComponent<EdgeElementProps>;
+  vertexPositionUpdater?: updateVerticesPositions;
+  viewOrigin?: readonly [number, number];
+  viewSize?: readonly [number, number];
 }
 
 /**

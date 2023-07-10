@@ -13,7 +13,7 @@ export const DefaultVertexElement = (props: VertexElementProps) => {
   };
   return (
     <g>
-      <circle r="5" fill={vertexSpecification.fill} stroke="black" />
+      <circle r="5" fill={vertexSpecification.fill ?? "none"} stroke="black" />
       <text
         // Create a plain background for the text.
         dominantBaseline="middle"

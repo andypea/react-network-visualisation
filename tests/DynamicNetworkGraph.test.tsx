@@ -4,7 +4,7 @@
 
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph.jsx";
+import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph";
 import { ResizeObserver } from "./mocks/resizeObserver.mock";
 
 global.ResizeObserver = ResizeObserver;
