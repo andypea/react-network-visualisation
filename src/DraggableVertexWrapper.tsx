@@ -1,16 +1,29 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
+import { StaticVertexWrapperProps } from "./StaticVertexWrapper";
+
+interface DraggableVertexWrapperProps extends StaticVertexWrapperProps {
+  id: string;
+  freezeVertex: (id: string) => void;
+  unfreezeVertex: (id: string) => void;
+  moveVertex: (id: string, position: { x: number; y: number }) => void;
+  svgToGraphTransform: (
+    svgPosition: readonly [number, number]
+  ) => [number, number];
+}
 
 /**
  * Vertex wrapper that makes the vertices draggable.
  */
-export const DraggableVertexWrapper = (props) => {
-  const thisVertex = useRef(null);
+export const DraggableVertexWrapper = (props: DraggableVertexWrapperProps) => {
+  const thisVertex = useRef<SVGGElement>(null);
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  const handleOnPointerDown = (event) => {
-    thisVertex.current.setPointerCapture(event.pointerId);
+  const handleOnPointerDown = (event: React.PointerEvent) => {
+    if (thisVertex.current) {
+      thisVertex.current.setPointerCapture(event.pointerId);
+    }
 
     setDragging(true);
     props.freezeVertex(props.id);
@@ -27,14 +40,14 @@ export const DraggableVertexWrapper = (props) => {
     });
   };
 
-  const handleOnPointerMove = (event) => {
+  const handleOnPointerMove = (event: React.PointerEvent) => {
     if (dragging) {
       // const screenToLocalTransformationMatrix = thisVertex.current.getScreenCTM();
       const pointerScreenPosition = new DOMPointReadOnly(
         event.pageX,
         event.pageY
       );
-      const pointerSvgPosition = [
+      const pointerSvgPosition: readonly [number, number] = [
         pointerScreenPosition.x - offset.x,
         pointerScreenPosition.y - offset.y,
       ];
@@ -50,10 +63,12 @@ export const DraggableVertexWrapper = (props) => {
     }
   };
 
-  const handleOnPointerUp = (event) => {
+  const handleOnPointerUp = (event: React.PointerEvent) => {
     setDragging(false);
     props.unfreezeVertex(props.id);
-    thisVertex.current.releasePointerCapture(event.pointerId);
+    if (thisVertex.current) {
+      thisVertex.current.releasePointerCapture(event.pointerId);
+    }
   };
 
   return (

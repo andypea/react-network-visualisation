@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 /**
  * The default component to render at each edge.
  */
-export const DefaultEdgeElement = ({ source, target }) => {
+export const DefaultEdgeElement = ({ source, target }: EdgeElementProps) => {
   return (
     <line
       x1={source.cx}

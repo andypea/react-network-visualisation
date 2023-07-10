@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 /**
  * The default component to render at each vertex.
  */
-export const DefaultVertexElement = (props) => {
+export const DefaultVertexElement = (props: VertexElementProps) => {
   // Set some default property values if they are missing.
   const vertexSpecification = {
     fill: "none",

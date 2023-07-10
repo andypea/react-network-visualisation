@@ -1,16 +1,9 @@
-interface vertexSpecification {
-  id: string;
-  position?: { cx: number; cy: number };
-}
-
 interface edgeSpecification {
   id: string;
   source: string;
   target: string;
   length?: number;
 }
-
-interface vertexPosition {}
 
 interface force {
   x: number;
