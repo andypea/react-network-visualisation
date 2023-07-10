@@ -1,6 +1,6 @@
-import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph.jsx";
-import { CustomEdgeElement } from "./CustomEdgeElement.jsx";
-import { CustomVertexElement } from "./CustomVertexElement.jsx";
+import { DynamicNetworkGraph } from "../src/DynamicNetworkGraph";
+import { CustomEdgeElement } from "./CustomEdgeElement";
+import { CustomVertexElement } from "./CustomVertexElement";
 
 export default {
   title: "Examples/DynamicNetworkGraph",

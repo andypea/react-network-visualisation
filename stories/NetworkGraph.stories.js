@@ -1,6 +1,6 @@
-import { NetworkGraph } from "../src/NetworkGraph.jsx";
-import { CustomVertexElement } from "./CustomVertexElement.jsx";
-import { CustomEdgeElement } from "./CustomEdgeElement.jsx";
+import { NetworkGraph } from "../src/NetworkGraph";
+import { CustomVertexElement } from "./CustomVertexElement";
+import { CustomEdgeElement } from "./CustomEdgeElement";
 
 export default {
   title: "Examples/NetworkGraph",
