@@ -11,7 +11,7 @@ It exports two components:
 ![Graph of a star constellation](https://raw.github.com/andypea/react-simple-network-graph/master/public/mahutonga.png?sanitize=true)
 
 The package is not optimised for the display of huge networks.
-However, its has minimal dependencies (just React, @babel/runtime and prop-types) and is very lightweight.
+However, its has minimal dependencies and is very lightweight.
 Both the visual display of the graphs and the movement of the dynamic graph can be customised.
 
 ## Examples
