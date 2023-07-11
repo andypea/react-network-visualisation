@@ -11,11 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Don't enforce prop-types on the width and height passed to the SVG.
-
 ### Changed
 
 ### Removed
+
+## [0.4.0] - 2023-07-11
+
+### Changed
+
+- Change bundle name to `dist/react-simple-network-graph.js`.
+- Transition original source files to Typescript.
+- Use the Typescript compiler (`tsc`) to transpile instead of Babel (Babel is still used for transpilation by Storybook).
 
 ## [0.3.0] - 2023-07-06
 
@@ -55,7 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `<NetworkGraph />` renders a static network graph.
 - `<DynamicNetworkGraph />` renders a dynamic network graph with draggable vertices.
 
-[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/andypea/react-simple-network-graph/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.4.0
 [0.3.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.3.0
 [0.2.1]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.2.1
 [0.2.0]: https://github.com/andypea/react-simple-network-graph/releases/tag/v0.2.0
