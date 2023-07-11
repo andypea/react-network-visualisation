@@ -1,4 +1,4 @@
-import customTheme from "./customTheme.js";
+import customTheme from "./customTheme";
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
