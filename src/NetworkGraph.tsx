@@ -9,6 +9,18 @@ import {
   svgPositionToGraphPosition,
 } from "./coordinateTransformations";
 
+export interface vertexSpecification {
+  id: string;
+  position?: null | { cx: number; cy: number };
+  fill?: null | string;
+  label?: null | string;
+}
+
+export interface VertexElementProps {
+  vertexSpecification: vertexSpecification;
+  backgroundColour: string;
+}
+
 export interface VertexWrapperProps {
   id: string;
   cx: number;
@@ -19,6 +31,18 @@ export interface VertexWrapperProps {
   svgToGraphTransform: (
     svgPosition: readonly [number, number]
   ) => readonly [number, number];
+}
+
+export interface edgeSpecification {
+  id: string;
+  source: string;
+  target: string;
+  length?: number;
+}
+
+export interface EdgeElementProps {
+  source: { cx: number; cy: number };
+  target: { cx: number; cy: number };
 }
 
 export interface NetworkGraphProps
@@ -34,30 +58,6 @@ export interface NetworkGraphProps
   viewSize?: readonly [number, number];
   preserveGraphAspectRatio?: boolean;
   margin?: number;
-}
-
-export interface VertexElementProps {
-  vertexSpecification: vertexSpecification;
-  backgroundColour: string;
-}
-
-export interface vertexSpecification {
-  id: string;
-  position?: null | { cx: number; cy: number };
-  fill?: null | string;
-  label?: null | string;
-}
-
-export interface EdgeElementProps {
-  source: { cx: number; cy: number };
-  target: { cx: number; cy: number };
-}
-
-export interface edgeSpecification {
-  id: string;
-  source: string;
-  target: string;
-  length?: number;
 }
 
 const defaultViewOrigin: readonly [number, number] = [0, 0];
