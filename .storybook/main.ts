@@ -20,6 +20,9 @@ const config = {
     autodocs: "tag",
   },
   staticDirs: ["../public"],
+  typescript: {
+    reactDocgen: "react-docgen",
+  },
 };
 
 export default config;

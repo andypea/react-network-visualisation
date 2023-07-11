@@ -6,6 +6,16 @@ export default {
   title: "Examples/NetworkGraph",
   component: NetworkGraph,
   tags: ["autodocs"],
+  argTypes: {
+    backgroundColour: { control: "color" },
+    stroke: { control: "color" },
+    VertexRender: { table: { category: "advanced", defaultValue: "" } },
+    EdgeRender: { table: { category: "advanced", defaultValue: "" } },
+    VertexWrapper: { table: { category: "advanced", defaultValue: "" } },
+    vertexPositionUpdater: {
+      table: { category: "advanced", defaultValue: "" },
+    },
+  },
   args: {
     width: "100%",
     height: "100%",

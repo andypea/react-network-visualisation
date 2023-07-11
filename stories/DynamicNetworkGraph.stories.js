@@ -6,6 +6,15 @@ export default {
   title: "Examples/DynamicNetworkGraph",
   component: DynamicNetworkGraph,
   tags: ["autodocs"],
+  argTypes: {
+    backgroundColour: { control: "color" },
+    stroke: { control: "color" },
+    VertexRender: { table: { category: "advanced", defaultValue: "" } },
+    EdgeRender: { table: { category: "advanced", defaultValue: "" } },
+    vertexPositionUpdater: {
+      table: { category: "advanced", defaultValue: "" },
+    },
+  },
   args: {
     width: "100%",
     height: "100%",
