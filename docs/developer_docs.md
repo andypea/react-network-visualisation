@@ -16,3 +16,8 @@ git config --local include.path ../.gitconfig
 ```
 
 ## Making a release
+
+## Babel
+
+Babel is only used by Storybook.
+Typescript (tsc) is used, via rollup, to build releases and generate type description (d.ts) files.
