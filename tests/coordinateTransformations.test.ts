@@ -49,19 +49,48 @@ const table = [
 ];
 
 test.each(table)(
-  "graphPositionToSvgPosition is the inverse of svgPositionToGraphPosition",
+  "graphPositionToSvgPosition is the inverse of svgPositionToGraphPosition (fixed aspect ratio)",
   ({ viewOrigin, viewSize, size, margin, graphPosition }) => {
     const coordinateTransformations = graphPositionToSvgPosition(
       viewOrigin,
       viewSize,
       size,
-      margin
+      margin,
+      true
     );
     const inverseCoordinateTransformation = svgPositionToGraphPosition(
       viewOrigin,
       viewSize,
       size,
-      margin
+      margin,
+      true
+    );
+
+    const actual = inverseCoordinateTransformation(
+      coordinateTransformations(graphPosition)
+    );
+
+    expect(actual).toHaveLength(graphPosition.length);
+    actual.forEach((x, i) => expect(x).toBeCloseTo(graphPosition[i], 5));
+  }
+);
+
+test.each(table)(
+  "graphPositionToSvgPosition is the inverse of svgPositionToGraphPosition (varying aspect ratio)",
+  ({ viewOrigin, viewSize, size, margin, graphPosition }) => {
+    const coordinateTransformations = graphPositionToSvgPosition(
+      viewOrigin,
+      viewSize,
+      size,
+      margin,
+      false
+    );
+    const inverseCoordinateTransformation = svgPositionToGraphPosition(
+      viewOrigin,
+      viewSize,
+      size,
+      margin,
+      false
     );
 
     const actual = inverseCoordinateTransformation(
