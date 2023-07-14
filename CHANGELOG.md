@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Implemented the `preserveAspectRatio` prop on `NetworkGraph`.
+- Export helper classes for use outside the package.
+
 ### Changed
 
 ### Removed

@@ -49,6 +49,7 @@ export interface DynamicNetworkGraphProps
   vertexPositionUpdater?: updateVerticesPositions;
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
+  preserveGraphAspectRatio?: boolean;
 }
 
 /**
@@ -64,6 +65,7 @@ export function DynamicNetworkGraph({
   vertexPositionUpdater = updateVerticesPositionsImp,
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
+  preserveGraphAspectRatio = true,
   ...otherProps
 }: DynamicNetworkGraphProps) {
   // Keeps track of the current vertex positions.
@@ -203,6 +205,7 @@ export function DynamicNetworkGraph({
       vertices={verticesWithPositions}
       stroke={stroke}
       backgroundColour={backgroundColour}
+      preserveGraphAspectRatio={preserveGraphAspectRatio}
       {...otherProps}
     />
   );

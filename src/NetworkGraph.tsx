@@ -76,7 +76,7 @@ export const NetworkGraph = ({
   stroke = "black",
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
-  preserveGraphAspectRatio = false,
+  preserveGraphAspectRatio = true,
   margin = 30,
   ...otherProps
 }: NetworkGraphProps) => {
@@ -106,7 +106,8 @@ export const NetworkGraph = ({
       viewOrigin,
       viewSize,
       size,
-      margin
+      margin,
+      preserveGraphAspectRatio
     );
 
     return new Map(
@@ -127,19 +128,21 @@ export const NetworkGraph = ({
           ];
         })
     );
-  }, [viewOrigin, viewSize, size, margin, vertices]);
+  }, [viewOrigin, viewSize, size, margin, vertices, preserveGraphAspectRatio]);
 
   const topLeft = graphPositionToSvgPosition(
     viewOrigin,
     viewSize,
     size,
-    margin
+    margin,
+    preserveGraphAspectRatio
   )(viewOrigin).map((x) => x - margin);
   const bottomRight = graphPositionToSvgPosition(
     viewOrigin,
     viewSize,
     size,
-    margin
+    margin,
+    preserveGraphAspectRatio
   )([viewOrigin[0] + viewSize[0], viewOrigin[1] + viewSize[1]]).map(
     (x) => x + margin
   );
@@ -150,10 +153,11 @@ export const NetworkGraph = ({
         viewOrigin,
         viewSize,
         size,
-        margin
+        margin,
+        preserveGraphAspectRatio
       )(svgPosition);
     },
-    [viewOrigin, viewSize, size, margin]
+    [viewOrigin, viewSize, size, margin, preserveGraphAspectRatio]
   );
 
   return (
