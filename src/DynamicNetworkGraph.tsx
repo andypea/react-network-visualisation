@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 
-import { updateVerticesPositionsImp } from "./components/defaultNumericalSimulation";
+import { defaultUpdateVerticesPositions } from "./utils/defaultNumericalSimulation";
 import { DefaultVertexComponent } from "./components/DefaultVertexComponent";
 import { DefaultEdgeComponent } from "./components/DefaultEdgeComponent";
 import {
@@ -69,7 +69,7 @@ export function DynamicNetworkGraph<
   stroke = "black",
   VertexComponent = DefaultVertexComponent,
   EdgeComponent = DefaultEdgeComponent,
-  vertexPositionUpdater = updateVerticesPositionsImp,
+  vertexPositionUpdater = defaultUpdateVerticesPositions,
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
   preserveGraphAspectRatio = true,

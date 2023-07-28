@@ -27,7 +27,7 @@ interface force {
  * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 
-export const updateVerticesPositionsImp: UpdateVerticesPositions = (
+export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
   oldVerticesPositions,
   width,
   height,
