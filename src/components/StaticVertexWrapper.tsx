@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
-import { VertexWrapperProps, vertexSpecification } from "./NetworkGraph";
+import { VertexWrapperProps, VertexSpecification } from "../NetworkGraph";
 
 /**
  * A component that wraps each vertex and sets the position.
  */
-export const StaticVertexWrapper = <V extends vertexSpecification>(
+export const StaticVertexWrapper = <V extends VertexSpecification>(
   props: VertexWrapperProps<V>
 ) => {
   return (

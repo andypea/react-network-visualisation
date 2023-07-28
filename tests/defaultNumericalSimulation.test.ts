@@ -1,12 +1,12 @@
-import { updateVerticesPositionsImp } from "../src/defaultComponents/defaultNumericalSimulation";
-import { edgeSpecification, vertexSpecification } from "../src/NetworkGraph";
+import { updateVerticesPositionsImp } from "../src/components/defaultNumericalSimulation";
+import { EdgeSpecification, VertexSpecification } from "../src/NetworkGraph";
 
 test("Empty vertex list remains empty.", () => {
   const oldVerticesPositions = new Map();
   const width = 100;
   const height = 100;
-  const edges: Array<edgeSpecification> = [];
-  const vertices: Array<edgeSpecification> = [];
+  const edges: Array<EdgeSpecification> = [];
+  const vertices: Array<EdgeSpecification> = [];
 
   expect(
     updateVerticesPositionsImp(
@@ -26,8 +26,8 @@ test("Missing vertices are dropped.", () => {
   ]);
   const width = 100;
   const height = 100;
-  const edges: Array<edgeSpecification> = [];
-  const vertices: Array<vertexSpecification> = [{ id: "a" }];
+  const edges: Array<EdgeSpecification> = [];
+  const vertices: Array<VertexSpecification> = [{ id: "a" }];
 
   const newVerticesPositions = updateVerticesPositionsImp(
     oldVerticesPositions,

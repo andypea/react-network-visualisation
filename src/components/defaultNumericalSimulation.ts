@@ -1,8 +1,8 @@
 import {
-  updateVerticesPositions,
-  vertexPosition,
+  UpdateVerticesPositions,
+  VertexPosition,
 } from "../DynamicNetworkGraph";
-import { vertexSpecification, Position } from "../NetworkGraph";
+import { VertexSpecification, Position } from "../NetworkGraph";
 
 interface force {
   x: number;
@@ -27,7 +27,7 @@ interface force {
  * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 
-export const updateVerticesPositionsImp: updateVerticesPositions = (
+export const updateVerticesPositionsImp: UpdateVerticesPositions = (
   oldVerticesPositions,
   width,
   height,
@@ -166,8 +166,8 @@ export const updateVerticesPositionsImp: updateVerticesPositions = (
 };
 
 const reconcileVertexPositions = (
-  vertices: Array<vertexSpecification & { position?: Position }>,
-  oldVerticesPositions: Map<string, vertexPosition>,
+  vertices: Array<VertexSpecification & { position?: Position }>,
+  oldVerticesPositions: Map<string, VertexPosition>,
   width: number,
   height: number
 ) => {

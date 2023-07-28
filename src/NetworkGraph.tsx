@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
-
-import { DefaultVertexElement } from "./defaultComponents/DefaultVertexElement";
-import { DefaultEdgeElement } from "./defaultComponents/DefaultEdgeElement";
-import { StaticVertexWrapper } from "./StaticVertexWrapper";
 import { useCallback, useRef, useState, useMemo } from "react";
+
+import { DefaultVertexElement } from "./components/DefaultVertexElement";
+import { DefaultEdgeElement } from "./components/DefaultEdgeElement";
+import { StaticVertexWrapper } from "./components/StaticVertexWrapper";
 import {
   graphPositionToSvgPosition,
   svgPositionToGraphPosition,
 } from "./utils/coordinateTransformations";
 
-export interface vertexSpecification {
+export interface VertexSpecification {
   id: string;
 }
 
@@ -18,12 +18,12 @@ export interface Position {
   cy: number;
 }
 
-export interface VertexElementProps<V extends vertexSpecification> {
+export interface VertexElementProps<V extends VertexSpecification> {
   vertexSpecification: V;
   backgroundColour: string;
 }
 
-export interface VertexWrapperProps<V extends vertexSpecification> {
+export interface VertexWrapperProps<V extends VertexSpecification> {
   id: string;
   cx: number;
   cy: number;
@@ -35,7 +35,7 @@ export interface VertexWrapperProps<V extends vertexSpecification> {
   ) => [number, number];
 }
 
-export interface edgeSpecification {
+export interface EdgeSpecification {
   id: string;
   sourceId: string;
   targetId: string;
@@ -47,8 +47,8 @@ export interface EdgeElementProps {
 }
 
 export interface NetworkGraphProps<
-  V extends vertexSpecification,
-  E extends edgeSpecification
+  V extends VertexSpecification,
+  E extends EdgeSpecification
 > extends React.ComponentPropsWithoutRef<"svg"> {
   VertexWrapper?: React.ComponentType<VertexWrapperProps<V>>;
   VertexRender?: React.ComponentType<VertexElementProps<V>>;
@@ -70,8 +70,8 @@ const defaultViewSize: readonly [number, number] = [100, 100];
  * A static (by default) network graph.
  */
 export const NetworkGraph = <
-  V extends vertexSpecification = vertexSpecification,
-  E extends edgeSpecification = edgeSpecification
+  V extends VertexSpecification = VertexSpecification,
+  E extends EdgeSpecification = EdgeSpecification
 >({
   VertexWrapper = StaticVertexWrapper<V>,
   VertexRender = DefaultVertexElement,

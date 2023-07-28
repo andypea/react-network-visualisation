@@ -1,5 +1,5 @@
 export { NetworkGraph } from "./NetworkGraph";
 export { DynamicNetworkGraph } from "./DynamicNetworkGraph";
-export { DefaultVertexElement } from "./defaultComponents/DefaultVertexElement";
+export { DefaultVertexElement } from "./components/DefaultVertexElement";
 export { VertexElementProps } from "./NetworkGraph";
-export { updateVerticesPositionsImp } from "./defaultComponents/defaultNumericalSimulation";
+export { updateVerticesPositionsImp } from "./components/defaultNumericalSimulation";

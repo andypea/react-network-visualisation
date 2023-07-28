@@ -1,23 +1,24 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { updateVerticesPositionsImp } from "./defaultComponents/defaultNumericalSimulation";
-import { DefaultVertexElement } from "./defaultComponents/DefaultVertexElement";
-import { DefaultEdgeElement } from "./defaultComponents/DefaultEdgeElement";
+
+import { updateVerticesPositionsImp } from "./components/defaultNumericalSimulation";
+import { DefaultVertexElement } from "./components/DefaultVertexElement";
+import { DefaultEdgeElement } from "./components/DefaultEdgeElement";
 import {
   NetworkGraph,
-  vertexSpecification,
-  edgeSpecification,
+  VertexSpecification,
+  EdgeSpecification,
   VertexElementProps,
   EdgeElementProps,
   VertexWrapperProps,
   Position,
 } from "./NetworkGraph";
-import { DraggableVertexWrapper } from "./DraggableVertexWrapper";
+import { DraggableVertexWrapper } from "./components/DraggableVertexWrapper";
 
 const defaultViewSize: readonly [number, number] = [100, 100];
 const defaultViewOrigin: readonly [number, number] = [0, 0];
 
-export interface vertexPosition {
+export interface VertexPosition {
   cx: number;
   cy: number;
   vx: number;
@@ -25,23 +26,23 @@ export interface vertexPosition {
   frozen: boolean;
 }
 
-export interface updateVerticesPositions {
+export interface UpdateVerticesPositions {
   (
-    oldVerticesPositions: Map<string, vertexPosition>,
+    oldVerticesPositions: Map<string, VertexPosition>,
     width: number,
     height: number,
-    edges: Array<edgeSpecification & { length?: number }>,
-    vertices: Array<vertexSpecification & { position?: Position }>,
+    edges: Array<EdgeSpecification & { length?: number }>,
+    vertices: Array<VertexSpecification & { position?: Position }>,
     friction?: number,
     timeStep?: number,
     springConstant?: number,
     interbodyForceStrength?: number
-  ): Map<string, vertexPosition>;
+  ): Map<string, VertexPosition>;
 }
 
 export interface DynamicNetworkGraphProps<
-  V extends vertexSpecification,
-  E extends edgeSpecification
+  V extends VertexSpecification,
+  E extends EdgeSpecification
 > extends React.ComponentPropsWithoutRef<"svg"> {
   vertices: Array<V & { position?: Position }>;
   edges: Array<E & { length?: number }>;
@@ -49,7 +50,7 @@ export interface DynamicNetworkGraphProps<
   stroke?: string;
   VertexRender?: React.ComponentType<VertexElementProps<V>>;
   EdgeRender?: React.ComponentType<EdgeElementProps>;
-  vertexPositionUpdater?: updateVerticesPositions;
+  vertexPositionUpdater?: UpdateVerticesPositions;
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
   preserveGraphAspectRatio?: boolean;
@@ -59,8 +60,8 @@ export interface DynamicNetworkGraphProps<
  * Dynamic network graph with draggable vertices.
  */
 export function DynamicNetworkGraph<
-  V extends vertexSpecification,
-  E extends edgeSpecification
+  V extends VertexSpecification,
+  E extends EdgeSpecification
 >({
   vertices = [],
   edges = [],
