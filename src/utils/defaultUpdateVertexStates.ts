@@ -1,7 +1,4 @@
-import {
-  UpdateVerticesPositions,
-  VertexPosition,
-} from "../DynamicNetworkGraph";
+import { UpdateVertexStates, VertexState } from "../DynamicNetworkGraph";
 import { VertexSpecification, Position } from "../NetworkGraph";
 
 interface force {
@@ -27,8 +24,8 @@ interface force {
  * @param [interbodyForceStrength] The strength of the inter-body force. Negative numbers will cause vertices to be pushed apart.
  */
 
-export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
-  oldVerticesPositions,
+export const defaultUpdateVertexStates: UpdateVertexStates = (
+  oldVertexStates,
   width,
   height,
   edges,
@@ -39,9 +36,9 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
   interbodyForceStrength = -1000
 ) => {
   // Drop all unused vertices from the vertex positions Map and add new vertices.
-  const newVerticesPositions = reconcileVertexPositions(
+  const newVertexStates = reconcileVertexStates(
     vertices,
-    oldVerticesPositions,
+    oldVertexStates,
     width,
     height
   );
@@ -52,7 +49,7 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
 
   // Add a force representing friction to each vertex.
   for (const vertex of vertices) {
-    const vertexPosition = newVerticesPositions.get(vertex.id);
+    const vertexPosition = newVertexStates.get(vertex.id);
     const force = forces.get(vertex.id) ?? { x: 0, y: 0 };
 
     forces.set(vertex.id, {
@@ -64,15 +61,15 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
   // Add a force to each pair of vertices joined by an edge that optimises the edge length.
   for (const e of edges) {
     if (
-      !newVerticesPositions.has(e.sourceId) ||
-      !newVerticesPositions.has(e.targetId) ||
+      !newVertexStates.has(e.sourceId) ||
+      !newVertexStates.has(e.targetId) ||
       !e.length
     ) {
       continue;
     }
 
-    const source = newVerticesPositions.get(e.sourceId);
-    const target = newVerticesPositions.get(e.targetId);
+    const source = newVertexStates.get(e.sourceId);
+    const target = newVertexStates.get(e.targetId);
 
     const distance = Math.sqrt(
       Math.pow(target.cx - source.cx, 2) + Math.pow(target.cy - source.cy, 2)
@@ -103,8 +100,8 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
     for (let j = i + 1; j < vertices.length; j++) {
       const vertexJId = vertices[j].id;
 
-      const vertexIPosition = newVerticesPositions.get(vertexIId);
-      const vertexJPosition = newVerticesPositions.get(vertexJId);
+      const vertexIPosition = newVertexStates.get(vertexIId);
+      const vertexJPosition = newVertexStates.get(vertexJId);
 
       const offset = {
         x: vertexJPosition.cx - vertexIPosition.cx,
@@ -138,8 +135,8 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
 
   // Update the position and velocity of each vertex.
   for (const vertex of vertices) {
-    const oldPosition = newVerticesPositions.get(vertex.id);
-    newVerticesPositions.set(vertex.id, {
+    const oldPosition = newVertexStates.get(vertex.id);
+    newVertexStates.set(vertex.id, {
       cx: clamp(
         oldPosition.cx +
           (oldPosition.frozen ? 0 : 1) * timeStep * oldPosition.vx,
@@ -162,12 +159,12 @@ export const defaultUpdateVerticesPositions: UpdateVerticesPositions = (
     });
   }
 
-  return newVerticesPositions;
+  return newVertexStates;
 };
 
-const reconcileVertexPositions = (
+const reconcileVertexStates = (
   vertices: Array<VertexSpecification & { position?: Position }>,
-  oldVerticesPositions: Map<string, VertexPosition>,
+  oldVerticesPositions: Map<string, VertexState>,
   width: number,
   height: number
 ) => {

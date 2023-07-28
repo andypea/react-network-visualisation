@@ -11,7 +11,7 @@ export {
 
 export {
   DynamicNetworkGraph,
-  VertexPosition,
-  UpdateVerticesPositions,
+  VertexState,
+  UpdateVertexStates,
   DynamicNetworkGraphProps,
 } from "./DynamicNetworkGraph";
