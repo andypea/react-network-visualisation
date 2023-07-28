@@ -2,14 +2,14 @@ import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import { updateVerticesPositionsImp } from "./components/defaultNumericalSimulation";
-import { DefaultVertexElement } from "./components/DefaultVertexElement";
-import { DefaultEdgeElement } from "./components/DefaultEdgeElement";
+import { DefaultVertexComponent } from "./components/DefaultVertexComponent";
+import { DefaultEdgeComponent } from "./components/DefaultEdgeComponent";
 import {
   NetworkGraph,
   VertexSpecification,
   EdgeSpecification,
-  VertexElementProps,
-  EdgeElementProps,
+  VertexComponentProps,
+  EdgeComponentProps,
   VertexWrapperProps,
   Position,
 } from "./NetworkGraph";
@@ -48,8 +48,8 @@ export interface DynamicNetworkGraphProps<
   edges: Array<E & { length?: number }>;
   backgroundColour?: string;
   stroke?: string;
-  VertexRender?: React.ComponentType<VertexElementProps<V>>;
-  EdgeRender?: React.ComponentType<EdgeElementProps>;
+  VertexComponent?: React.ComponentType<VertexComponentProps<V>>;
+  EdgeComponent?: React.ComponentType<EdgeComponentProps>;
   vertexPositionUpdater?: UpdateVerticesPositions;
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
@@ -67,8 +67,8 @@ export function DynamicNetworkGraph<
   edges = [],
   backgroundColour = "white",
   stroke = "black",
-  VertexRender = DefaultVertexElement,
-  EdgeRender = DefaultEdgeElement,
+  VertexComponent = DefaultVertexComponent,
+  EdgeComponent = DefaultEdgeComponent,
   vertexPositionUpdater = updateVerticesPositionsImp,
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
@@ -204,8 +204,8 @@ export function DynamicNetworkGraph<
   return (
     <NetworkGraph
       VertexWrapper={VertexWrapper}
-      VertexRender={VertexRender}
-      EdgeRender={EdgeRender}
+      VertexComponent={VertexComponent}
+      EdgeComponent={EdgeComponent}
       viewOrigin={viewOrigin}
       viewSize={viewSize}
       edges={edges}
@@ -242,12 +242,12 @@ DynamicNetworkGraph.propTypes = {
   /**
    * Component to render at each vertex.
    */
-  VertexRender: PropTypes.func,
+  VertexComponent: PropTypes.func,
 
   /**
    * Component to render at each edge.
    */
-  EdgeRender: PropTypes.func,
+  EdgeComponent: PropTypes.func,
 
   /**
    * Function that updates the vertex positions on each frame.

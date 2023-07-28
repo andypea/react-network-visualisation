@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import { VertexElementProps, VertexSpecification } from "../NetworkGraph";
+import { VertexComponentProps, VertexSpecification } from "../NetworkGraph";
 
 /**
  * The default component to render at each vertex.
  */
-export const DefaultVertexElement = (
-  props: VertexElementProps<VertexSpecification>
+export const DefaultVertexComponent = (
+  props: VertexComponentProps<VertexSpecification>
 ) => {
   // Set some default property values if they are missing.
   const vertexSpecification = {
@@ -39,7 +39,7 @@ export const DefaultVertexElement = (
   );
 };
 
-DefaultVertexElement.propTypes = {
+DefaultVertexComponent.propTypes = {
   /**
    * The vertex specification supplied to the network graph.
    */

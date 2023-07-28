@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
 import { useCallback, useRef, useState, useMemo } from "react";
+import PropTypes from "prop-types";
 
-import { DefaultVertexElement } from "./components/DefaultVertexElement";
-import { DefaultEdgeElement } from "./components/DefaultEdgeElement";
+import { DefaultVertexComponent } from "./components/DefaultVertexComponent";
+import { DefaultEdgeComponent } from "./components/DefaultEdgeComponent";
 import { StaticVertexWrapper } from "./components/StaticVertexWrapper";
 import {
   graphPositionToSvgPosition,
@@ -18,7 +18,7 @@ export interface Position {
   cy: number;
 }
 
-export interface VertexElementProps<V extends VertexSpecification> {
+export interface VertexComponentProps<V extends VertexSpecification> {
   vertexSpecification: V;
   backgroundColour: string;
 }
@@ -27,7 +27,7 @@ export interface VertexWrapperProps<V extends VertexSpecification> {
   id: string;
   cx: number;
   cy: number;
-  VertexRender: React.ComponentType<VertexElementProps<V>>;
+  VertexRender: React.ComponentType<VertexComponentProps<V>>;
   vertexSpecification: V;
   backgroundColour: string;
   svgToGraphTransform: (
@@ -41,7 +41,7 @@ export interface EdgeSpecification {
   targetId: string;
 }
 
-export interface EdgeElementProps {
+export interface EdgeComponentProps {
   source: { cx: number; cy: number };
   target: { cx: number; cy: number };
 }
@@ -51,8 +51,8 @@ export interface NetworkGraphProps<
   E extends EdgeSpecification
 > extends React.ComponentPropsWithoutRef<"svg"> {
   VertexWrapper?: React.ComponentType<VertexWrapperProps<V>>;
-  VertexRender?: React.ComponentType<VertexElementProps<V>>;
-  EdgeRender?: React.ComponentType<EdgeElementProps>;
+  VertexComponent?: React.ComponentType<VertexComponentProps<V>>;
+  EdgeComponent?: React.ComponentType<EdgeComponentProps>;
   vertices?: Array<V & { position: Position }>;
   edges?: Array<E>;
   backgroundColour?: string;
@@ -74,8 +74,8 @@ export const NetworkGraph = <
   E extends EdgeSpecification = EdgeSpecification
 >({
   VertexWrapper = StaticVertexWrapper<V>,
-  VertexRender = DefaultVertexElement,
-  EdgeRender = DefaultEdgeElement,
+  VertexComponent = DefaultVertexComponent,
+  EdgeComponent = DefaultEdgeComponent,
   vertices = [],
   edges = [],
   backgroundColour = "white",
@@ -202,7 +202,7 @@ export const NetworkGraph = <
                   )
                   .map((e) => {
                     return (
-                      <EdgeRender
+                      <EdgeComponent
                         key={e.id}
                         source={
                           verticesPositions.get(e.sourceId)?.position ?? {
@@ -230,7 +230,7 @@ export const NetworkGraph = <
                     id={v.id}
                     cx={verticesPositions.get(v.id)?.position?.cx ?? 0}
                     cy={verticesPositions.get(v.id)?.position?.cy ?? 0}
-                    VertexRender={VertexRender}
+                    VertexRender={VertexComponent}
                     vertexSpecification={v}
                     backgroundColour={backgroundColour}
                     svgToGraphTransform={svgToGraphTransform}
@@ -272,12 +272,12 @@ NetworkGraph.propTypes = {
   /**
    * Component to render at each vertex.
    */
-  VertexRender: PropTypes.func,
+  VertexComponent: PropTypes.func,
 
   /**
    * Component to render at each edge.
    */
-  EdgeRender: PropTypes.func,
+  EdgeComponent: PropTypes.func,
 
   /**
    * Component to place each vertex in.

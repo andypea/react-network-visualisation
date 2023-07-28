@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
-import { EdgeElementProps } from "../NetworkGraph";
+import { EdgeComponentProps } from "../NetworkGraph";
 
 /**
  * The default component to render at each edge.
  */
-export const DefaultEdgeElement = ({ source, target }: EdgeElementProps) => {
+export const DefaultEdgeComponent = ({
+  source,
+  target,
+}: EdgeComponentProps) => {
   return (
     <line
       x1={source.cx}
@@ -16,7 +19,7 @@ export const DefaultEdgeElement = ({ source, target }: EdgeElementProps) => {
   );
 };
 
-DefaultEdgeElement.propTypes = {
+DefaultEdgeComponent.propTypes = {
   /**
    * The position of the source vertex.
    */
