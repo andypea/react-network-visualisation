@@ -1,7 +1,7 @@
 export {
   NetworkGraph,
   VertexSpecification,
-  Position,
+  VertexPosition,
   VertexComponentProps,
   VertexWrapperProps,
   EdgeSpecification,

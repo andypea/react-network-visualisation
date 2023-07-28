@@ -11,7 +11,7 @@ import {
   VertexComponentProps,
   EdgeComponentProps,
   VertexWrapperProps,
-  Position,
+  VertexPosition,
 } from "./NetworkGraph";
 import { DraggableVertexWrapper } from "./components/DraggableVertexWrapper";
 
@@ -32,7 +32,7 @@ export interface UpdateVertexStates {
     width: number,
     height: number,
     edges: Array<EdgeSpecification & { length?: number }>,
-    vertices: Array<VertexSpecification & { position?: Position }>,
+    vertices: Array<VertexSpecification & { position?: VertexPosition }>,
     friction?: number,
     timeStep?: number,
     springConstant?: number,
@@ -44,7 +44,7 @@ export interface DynamicNetworkGraphProps<
   V extends VertexSpecification,
   E extends EdgeSpecification
 > extends React.ComponentPropsWithoutRef<"svg"> {
-  vertices: Array<V & { position?: Position }>;
+  vertices: Array<V & { position?: VertexPosition }>;
   edges: Array<E & { length?: number }>;
   backgroundColour?: string;
   stroke?: string;

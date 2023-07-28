@@ -13,7 +13,7 @@ export interface VertexSpecification {
   id: string;
 }
 
-export interface Position {
+export interface VertexPosition {
   cx: number;
   cy: number;
 }
@@ -53,7 +53,7 @@ export interface NetworkGraphProps<
   VertexWrapper?: React.ComponentType<VertexWrapperProps<V>>;
   VertexComponent?: React.ComponentType<VertexComponentProps<V>>;
   EdgeComponent?: React.ComponentType<EdgeComponentProps>;
-  vertices?: Array<V & { position: Position }>;
+  vertices?: Array<V & { position: VertexPosition }>;
   edges?: Array<E>;
   backgroundColour?: string;
   stroke?: string;

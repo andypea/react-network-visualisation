@@ -1,5 +1,5 @@
 import { UpdateVertexStates, VertexState } from "../DynamicNetworkGraph";
-import { VertexSpecification, Position } from "../NetworkGraph";
+import { VertexSpecification, VertexPosition } from "../NetworkGraph";
 
 interface force {
   x: number;
@@ -163,7 +163,7 @@ export const defaultUpdateVertexStates: UpdateVertexStates = (
 };
 
 const reconcileVertexStates = (
-  vertices: Array<VertexSpecification & { position?: Position }>,
+  vertices: Array<VertexSpecification & { position?: VertexPosition }>,
   oldVerticesPositions: Map<string, VertexState>,
   width: number,
   height: number
