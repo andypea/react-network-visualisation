@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Typescript support.
+
 ### Fixed
 
 - Implemented the `preserveAspectRatio` prop on `NetworkGraph`.
