@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { EdgeElementProps } from "./NetworkGraph";
+import { EdgeElementProps } from "../NetworkGraph";
 
 /**
  * The default component to render at each edge.

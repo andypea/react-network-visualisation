@@ -1,7 +1,7 @@
 import {
   graphPositionToSvgPosition,
   svgPositionToGraphPosition,
-} from "../src/coordinateTransformations.js";
+} from "../src/utils/coordinateTransformations.js";
 
 const table = [
   {

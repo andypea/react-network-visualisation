@@ -1,5 +1,8 @@
-import { updateVerticesPositions, vertexPosition } from "./DynamicNetworkGraph";
-import { vertexSpecification, Position } from "./NetworkGraph";
+import {
+  updateVerticesPositions,
+  vertexPosition,
+} from "../DynamicNetworkGraph";
+import { vertexSpecification, Position } from "../NetworkGraph";
 
 interface force {
   x: number;

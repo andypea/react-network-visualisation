@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { updateVerticesPositionsImp } from "./defaultNumericalSimulation";
-import { DefaultVertexElement } from "./DefaultVertexElement";
-import { DefaultEdgeElement } from "./DefaultEdgeElement";
+import { updateVerticesPositionsImp } from "./defaultComponents/defaultNumericalSimulation";
+import { DefaultVertexElement } from "./defaultComponents/DefaultVertexElement";
+import { DefaultEdgeElement } from "./defaultComponents/DefaultEdgeElement";
 import {
   NetworkGraph,
   vertexSpecification,

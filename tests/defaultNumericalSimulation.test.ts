@@ -1,4 +1,4 @@
-import { updateVerticesPositionsImp } from "../src/defaultNumericalSimulation";
+import { updateVerticesPositionsImp } from "../src/defaultComponents/defaultNumericalSimulation";
 import { edgeSpecification, vertexSpecification } from "../src/NetworkGraph";
 
 test("Empty vertex list remains empty.", () => {
