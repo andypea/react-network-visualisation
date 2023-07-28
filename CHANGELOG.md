@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Renamed functions and types to improve consistency.
+
 ### Removed
 
 ## [0.4.0] - 2023-07-11
