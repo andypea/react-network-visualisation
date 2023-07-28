@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
-import { VertexElementProps } from "./NetworkGraph";
+import { VertexElementProps, vertexSpecification } from "./NetworkGraph";
 
 /**
  * The default component to render at each vertex.
  */
-export const DefaultVertexElement = (props: VertexElementProps) => {
+export const DefaultVertexElement = (
+  props: VertexElementProps<vertexSpecification>
+) => {
   // Set some default property values if they are missing.
   const vertexSpecification = {
     fill: "none",
@@ -43,12 +45,14 @@ DefaultVertexElement.propTypes = {
    */
   vertexSpecification: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    fill: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    position: PropTypes.exact({
+      cx: PropTypes.number.isRequired,
+      cy: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
 
   /**
    * The background colour of the network graph.
    */
   backgroundColour: PropTypes.string.isRequired,
-};
+} as object;

@@ -11,33 +11,34 @@ import {
 
 export interface vertexSpecification {
   id: string;
-  position?: null | { cx: number; cy: number };
-  fill?: null | string;
-  label?: null | string;
 }
 
-export interface VertexElementProps {
-  vertexSpecification: vertexSpecification;
+export interface Position {
+  cx: number;
+  cy: number;
+}
+
+export interface VertexElementProps<V extends vertexSpecification> {
+  vertexSpecification: V;
   backgroundColour: string;
 }
 
-export interface VertexWrapperProps {
+export interface VertexWrapperProps<V extends vertexSpecification> {
   id: string;
   cx: number;
   cy: number;
-  VertexRender: React.FunctionComponent<VertexElementProps>;
-  vertexSpecification: vertexSpecification;
+  VertexRender: React.ComponentType<VertexElementProps<V>>;
+  vertexSpecification: V;
   backgroundColour: string;
   svgToGraphTransform: (
     svgPosition: readonly [number, number]
-  ) => readonly [number, number];
+  ) => [number, number];
 }
 
 export interface edgeSpecification {
   id: string;
-  source: string;
-  target: string;
-  length?: number;
+  sourceId: string;
+  targetId: string;
 }
 
 export interface EdgeElementProps {
@@ -45,13 +46,15 @@ export interface EdgeElementProps {
   target: { cx: number; cy: number };
 }
 
-export interface NetworkGraphProps
-  extends React.ComponentPropsWithoutRef<"svg"> {
-  VertexWrapper?: React.FunctionComponent<VertexWrapperProps>;
-  VertexRender?: React.FunctionComponent<VertexElementProps>;
-  EdgeRender?: React.FunctionComponent<EdgeElementProps>;
-  vertices?: Array<vertexSpecification>;
-  edges?: Array<edgeSpecification>;
+export interface NetworkGraphProps<
+  V extends vertexSpecification,
+  E extends edgeSpecification
+> extends React.ComponentPropsWithoutRef<"svg"> {
+  VertexWrapper?: React.ComponentType<VertexWrapperProps<V>>;
+  VertexRender?: React.ComponentType<VertexElementProps<V>>;
+  EdgeRender?: React.ComponentType<EdgeElementProps>;
+  vertices?: Array<V & { position: Position }>;
+  edges?: Array<E>;
   backgroundColour?: string;
   stroke?: string;
   viewOrigin?: readonly [number, number];
@@ -66,8 +69,11 @@ const defaultViewSize: readonly [number, number] = [100, 100];
 /**
  * A static (by default) network graph.
  */
-export const NetworkGraph = ({
-  VertexWrapper = StaticVertexWrapper,
+export const NetworkGraph = <
+  V extends vertexSpecification = vertexSpecification,
+  E extends edgeSpecification = edgeSpecification
+>({
+  VertexWrapper = StaticVertexWrapper<V>,
   VertexRender = DefaultVertexElement,
   EdgeRender = DefaultEdgeElement,
   vertices = [],
@@ -79,7 +85,7 @@ export const NetworkGraph = ({
   preserveGraphAspectRatio = true,
   margin = 30,
   ...otherProps
-}: NetworkGraphProps) => {
+}: NetworkGraphProps<V, E>) => {
   const [size, setSize] = useState<readonly [number, number]>([150, 150]);
 
   const resizeObserver = useRef(
@@ -191,21 +197,21 @@ export const NetworkGraph = ({
                   .filter(
                     // Don't try and render any edges to non-existent vertices.
                     (e) =>
-                      verticesPositions.has(e.source) &&
-                      verticesPositions.has(e.target)
+                      verticesPositions.has(e.sourceId) &&
+                      verticesPositions.has(e.targetId)
                   )
                   .map((e) => {
                     return (
                       <EdgeRender
                         key={e.id}
                         source={
-                          verticesPositions.get(e.source)?.position ?? {
+                          verticesPositions.get(e.sourceId)?.position ?? {
                             cx: 0,
                             cy: 0,
                           }
                         }
                         target={
-                          verticesPositions.get(e.target)?.position ?? {
+                          verticesPositions.get(e.targetId)?.position ?? {
                             cx: 0,
                             cy: 0,
                           }

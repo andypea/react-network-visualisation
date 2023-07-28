@@ -41,12 +41,12 @@ export default {
       },
     ],
     edges: [
-      { id: "OneTwo", source: "One", target: "Two" },
-      { id: "OneThree", source: "One", target: "Three" },
-      { id: "OneFour", source: "One", target: "Four" },
-      { id: "TwoThree", source: "Two", target: "Three" },
-      { id: "TwoFour", source: "Two", target: "Four" },
-      { id: "ThreeFour", source: "Three", target: "Four" },
+      { id: "OneTwo", sourceId: "One", targetId: "Two" },
+      { id: "OneThree", sourceId: "One", targetId: "Three" },
+      { id: "OneFour", sourceId: "One", targetId: "Four" },
+      { id: "TwoThree", sourceId: "Two", targetId: "Three" },
+      { id: "TwoFour", sourceId: "Two", targetId: "Four" },
+      { id: "ThreeFour", sourceId: "Three", targetId: "Four" },
     ],
   },
 };
@@ -86,8 +86,8 @@ export const Māhutonga = {
       },
     ],
     edges: [
-      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux" },
-      { id: "MimosaImai", source: "Mimosa", target: "Imai" },
+      { id: "GacruxAcrux", sourceId: "Gacrux", targetId: "Acrux" },
+      { id: "MimosaImai", sourceId: "Mimosa", targetId: "Imai" },
     ],
   },
 };
@@ -104,9 +104,9 @@ export const Triangle = {
       { id: "C", fill: "black", label: "C", position: { cx: 0, cy: 100 } },
     ],
     edges: [
-      { id: "AB", source: "A", target: "B" },
-      { id: "AC", source: "A", target: "C" },
-      { id: "BC", source: "B", target: "C" },
+      { id: "AB", sourceId: "A", targetId: "B" },
+      { id: "AC", sourceId: "A", targetId: "C" },
+      { id: "BC", sourceId: "B", targetId: "C" },
     ],
   },
 };

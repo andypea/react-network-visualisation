@@ -43,10 +43,10 @@ test("loads a basic graph", async () => {
         },
       ]}
       edges={[
-        { id: "OneTwo", source: "One", target: "Two" },
-        { id: "OneFour", source: "One", target: "Four" },
-        { id: "TwoThree", source: "Two", target: "Three" },
-        { id: "ThreeFour", source: "Three", target: "Four" },
+        { id: "OneTwo", sourceId: "One", targetId: "Two" },
+        { id: "OneFour", sourceId: "One", targetId: "Four" },
+        { id: "TwoThree", sourceId: "Two", targetId: "Three" },
+        { id: "ThreeFour", sourceId: "Three", targetId: "Four" },
       ]}
     />
   );

@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { VertexWrapperProps } from "./NetworkGraph";
+import { VertexWrapperProps, vertexSpecification } from "./NetworkGraph";
 
-interface DraggableVertexWrapperProps extends VertexWrapperProps {
+interface DraggableVertexWrapperProps<V extends vertexSpecification>
+  extends VertexWrapperProps<V> {
   freezeVertex: (id: string) => void;
   unfreezeVertex: (id: string) => void;
   moveVertex: (id: string, position: { x: number; y: number }) => void;
@@ -11,7 +12,9 @@ interface DraggableVertexWrapperProps extends VertexWrapperProps {
 /**
  * Vertex wrapper that makes the vertices draggable.
  */
-export const DraggableVertexWrapper = (props: DraggableVertexWrapperProps) => {
+export const DraggableVertexWrapper = <V extends vertexSpecification>(
+  props: DraggableVertexWrapperProps<V>
+) => {
   const thisVertex = useRef<SVGGElement>(null);
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -133,4 +136,4 @@ DraggableVertexWrapper.propTypes = {
    * Function which transforms coordinates from SVG space into graph space.
    */
   svgToGraphTransform: PropTypes.func,
-};
+} as object;

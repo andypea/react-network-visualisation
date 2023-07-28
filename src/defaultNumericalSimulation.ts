@@ -1,5 +1,5 @@
 import { updateVerticesPositions, vertexPosition } from "./DynamicNetworkGraph";
-import { vertexSpecification } from "./NetworkGraph";
+import { vertexSpecification, Position } from "./NetworkGraph";
 
 interface force {
   x: number;
@@ -61,15 +61,15 @@ export const updateVerticesPositionsImp: updateVerticesPositions = (
   // Add a force to each pair of vertices joined by an edge that optimises the edge length.
   for (const e of edges) {
     if (
-      !newVerticesPositions.has(e.source) ||
-      !newVerticesPositions.has(e.target) ||
-      e.length === undefined
+      !newVerticesPositions.has(e.sourceId) ||
+      !newVerticesPositions.has(e.targetId) ||
+      !e.length
     ) {
       continue;
     }
 
-    const source = newVerticesPositions.get(e.source);
-    const target = newVerticesPositions.get(e.target);
+    const source = newVerticesPositions.get(e.sourceId);
+    const target = newVerticesPositions.get(e.targetId);
 
     const distance = Math.sqrt(
       Math.pow(target.cx - source.cx, 2) + Math.pow(target.cy - source.cy, 2)
@@ -82,14 +82,14 @@ export const updateVerticesPositionsImp: updateVerticesPositions = (
       y: (forceScalar * (target.cy - source.cy)) / distance,
     };
 
-    const forceSource = forces.get(e.source) ?? { x: 0, y: 0 };
-    forces.set(e.source, {
+    const forceSource = forces.get(e.sourceId) ?? { x: 0, y: 0 };
+    forces.set(e.sourceId, {
       x: forceSource.x + forceSourceToTarget.x,
       y: forceSource.y + forceSourceToTarget.y,
     });
 
-    const forceTarget = forces.get(e.target) ?? { x: 0, y: 0 };
-    forces.set(e.target, {
+    const forceTarget = forces.get(e.targetId) ?? { x: 0, y: 0 };
+    forces.set(e.targetId, {
       x: forceTarget.x - forceSourceToTarget.x,
       y: forceTarget.y - forceSourceToTarget.y,
     });
@@ -163,7 +163,7 @@ export const updateVerticesPositionsImp: updateVerticesPositions = (
 };
 
 const reconcileVertexPositions = (
-  vertices: Array<vertexSpecification>,
+  vertices: Array<vertexSpecification & { position?: Position }>,
   oldVerticesPositions: Map<string, vertexPosition>,
   width: number,
   height: number

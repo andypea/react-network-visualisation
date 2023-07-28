@@ -41,12 +41,12 @@ export default {
       },
     ],
     edges: [
-      { id: "OneTwo", source: "One", target: "Two", length: 10 * 3 },
-      { id: "OneThree", source: "One", target: "Three", length: 10 * 4 },
-      { id: "OneFour", source: "One", target: "Four", length: 10 * 5 },
-      { id: "TwoThree", source: "Two", target: "Three", length: 10 * 5 },
-      { id: "TwoFour", source: "Two", target: "Four", length: 10 * 4 },
-      { id: "ThreeFour", source: "Three", target: "Four", length: 10 * 3 },
+      { id: "OneTwo", sourceId: "One", targetId: "Two", length: 10 * 3 },
+      { id: "OneThree", sourceId: "One", targetId: "Three", length: 10 * 4 },
+      { id: "OneFour", sourceId: "One", targetId: "Four", length: 10 * 5 },
+      { id: "TwoThree", sourceId: "Two", targetId: "Three", length: 10 * 5 },
+      { id: "TwoFour", sourceId: "Two", targetId: "Four", length: 10 * 4 },
+      { id: "ThreeFour", sourceId: "Three", targetId: "Four", length: 10 * 3 },
     ],
   },
 };
@@ -86,8 +86,8 @@ export const Māhutonga = {
       },
     ],
     edges: [
-      { id: "GacruxAcrux", source: "Gacrux", target: "Acrux", length: 75 },
-      { id: "MimosaImai", source: "Mimosa", target: "Imai", length: 50 },
+      { id: "GacruxAcrux", sourceId: "Gacrux", targetId: "Acrux", length: 75 },
+      { id: "MimosaImai", sourceId: "Mimosa", targetId: "Imai", length: 50 },
     ],
   },
 };
@@ -104,9 +104,9 @@ export const RandomTriangle = {
       { id: "C", fill: "black", label: "C" },
     ],
     edges: [
-      { id: "AB", source: "A", target: "B", length: 100 },
-      { id: "AC", source: "A", target: "C", length: 100 },
-      { id: "BC", source: "B", target: "C", length: 100 },
+      { id: "AB", sourceId: "A", targetId: "B", length: 100 },
+      { id: "AC", sourceId: "A", targetId: "C", length: 100 },
+      { id: "BC", sourceId: "B", targetId: "C", length: 100 },
     ],
   },
 };

@@ -6,7 +6,7 @@ export const graphPositionToSvgPosition =
     margin: number,
     preserveGraphAspectRatio: boolean
   ) =>
-  (graphPosition: readonly [number, number]): readonly [number, number] => {
+  (graphPosition: readonly [number, number]): [number, number] => {
     const scalingFactorValues = scalingFactors(
       size,
       margin,
@@ -32,7 +32,7 @@ export const svgPositionToGraphPosition =
     margin: number,
     preserveGraphAspectRatio: boolean
   ) =>
-  (svgPosition: readonly [number, number]): readonly [number, number] => {
+  (svgPosition: readonly [number, number]): [number, number] => {
     const scalingFactorValues = scalingFactors(
       size,
       margin,

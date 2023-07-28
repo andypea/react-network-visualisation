@@ -10,6 +10,7 @@ import {
   VertexElementProps,
   EdgeElementProps,
   VertexWrapperProps,
+  Position,
 } from "./NetworkGraph";
 import { DraggableVertexWrapper } from "./DraggableVertexWrapper";
 
@@ -29,8 +30,8 @@ export interface updateVerticesPositions {
     oldVerticesPositions: Map<string, vertexPosition>,
     width: number,
     height: number,
-    edges: Array<edgeSpecification>,
-    vertices: Array<vertexSpecification>,
+    edges: Array<edgeSpecification & { length?: number }>,
+    vertices: Array<vertexSpecification & { position?: Position }>,
     friction?: number,
     timeStep?: number,
     springConstant?: number,
@@ -38,14 +39,16 @@ export interface updateVerticesPositions {
   ): Map<string, vertexPosition>;
 }
 
-export interface DynamicNetworkGraphProps
-  extends React.ComponentPropsWithoutRef<"svg"> {
-  vertices: Array<vertexSpecification>;
-  edges: Array<edgeSpecification>;
+export interface DynamicNetworkGraphProps<
+  V extends vertexSpecification,
+  E extends edgeSpecification
+> extends React.ComponentPropsWithoutRef<"svg"> {
+  vertices: Array<V & { position?: Position }>;
+  edges: Array<E & { length?: number }>;
   backgroundColour?: string;
   stroke?: string;
-  VertexRender?: React.FunctionComponent<VertexElementProps>;
-  EdgeRender?: React.FunctionComponent<EdgeElementProps>;
+  VertexRender?: React.ComponentType<VertexElementProps<V>>;
+  EdgeRender?: React.ComponentType<EdgeElementProps>;
   vertexPositionUpdater?: updateVerticesPositions;
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
@@ -55,7 +58,10 @@ export interface DynamicNetworkGraphProps
 /**
  * Dynamic network graph with draggable vertices.
  */
-export function DynamicNetworkGraph({
+export function DynamicNetworkGraph<
+  V extends vertexSpecification,
+  E extends edgeSpecification
+>({
   vertices = [],
   edges = [],
   backgroundColour = "white",
@@ -67,7 +73,7 @@ export function DynamicNetworkGraph({
   viewSize = defaultViewSize,
   preserveGraphAspectRatio = true,
   ...otherProps
-}: DynamicNetworkGraphProps) {
+}: DynamicNetworkGraphProps<V, E>) {
   // Keeps track of the current vertex positions.
   const [verticesPositions, setVerticesPositions] = useState(new Map());
 
@@ -168,9 +174,9 @@ export function DynamicNetworkGraph({
   // The use of `useCallback` prevents the vertices being
   // recreated by React on every frame.
   const VertexWrapper = useCallback(
-    (props: VertexWrapperProps) => {
+    (props: VertexWrapperProps<V>) => {
       return (
-        <DraggableVertexWrapper
+        <DraggableVertexWrapper<V>
           {...props}
           moveVertex={moveVertex}
           freezeVertex={freezeVertex}
