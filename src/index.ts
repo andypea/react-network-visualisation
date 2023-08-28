@@ -15,3 +15,7 @@ export {
   UpdateVertexStates,
   DynamicNetworkGraphProps,
 } from "./DynamicNetworkGraph";
+
+export { DefaultEdgeComponent } from "./components/DefaultEdgeComponent";
+export { DefaultVertexComponent } from "./components/DefaultVertexComponent";
+export { defaultUpdateVertexStates } from "./utils/defaultUpdateVertexStates";
