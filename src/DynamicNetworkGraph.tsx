@@ -54,6 +54,7 @@ export interface DynamicNetworkGraphProps<
   viewOrigin?: readonly [number, number];
   viewSize?: readonly [number, number];
   preserveGraphAspectRatio?: boolean;
+  margin?: number;
 }
 
 /**
@@ -73,6 +74,7 @@ export function DynamicNetworkGraph<
   viewOrigin = defaultViewOrigin,
   viewSize = defaultViewSize,
   preserveGraphAspectRatio = true,
+  margin = 30,
   ...otherProps
 }: DynamicNetworkGraphProps<V, E>) {
   // Keeps track of the current vertex positions.
@@ -213,6 +215,7 @@ export function DynamicNetworkGraph<
       stroke={stroke}
       backgroundColour={backgroundColour}
       preserveGraphAspectRatio={preserveGraphAspectRatio}
+      margin={margin}
       {...otherProps}
     />
   );
@@ -263,4 +266,9 @@ DynamicNetworkGraph.propTypes = {
    * The size of the rectangle to be viewed (in graph units).
    */
   viewSize: PropTypes.arrayOf(PropTypes.number),
+
+  /**
+   * The size of the margin to place around the graph (in SVG pixels)/
+   */
+  margin: PropTypes.number,
 };
